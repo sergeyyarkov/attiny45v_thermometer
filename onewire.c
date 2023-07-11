@@ -17,7 +17,7 @@ uint8_t OneWire_Presence(void) {
 void OneWire_WriteByte(uint8_t byte) {
   uint8_t i = 8;
 
-  while (i--) {
+  do {
     cli();
     if (byte & 0x01) {
       ow_pull();
@@ -32,14 +32,14 @@ void OneWire_WriteByte(uint8_t byte) {
     }
     sei();
     byte >>= 1;
-  }
+  } while (--i);
 }
 
 uint8_t OneWire_ReadByte() {
   uint8_t byte = 0;
   uint8_t i = 8;
-
-  while (i--) {
+  
+  do {
     cli();
     byte >>= 1;
     ow_pull();
@@ -49,7 +49,7 @@ uint8_t OneWire_ReadByte() {
     if (bit_is_set(OW_PIN, OW_LINE)) byte |= (1<<7);
     _delay_us(55);
     sei();
-  }
+  } while (--i);
 
   return byte;
 }
@@ -63,30 +63,29 @@ uint8_t OneWire_SkipROM() {
 uint8_t OneWire_ReadROM(uint8_t *buffer) {
   if (!OneWire_Presence()) return 0;
   
-  uint8_t p = 0;
+  uint8_t i = 8;
   OneWire_WriteByte(ONE_WIRE_READROM);
   
-  while (p < 8) {
+  do {
     *(buffer++) = OneWire_ReadByte();
-    p++;
-  }
+  } while (--i);
   
   return 1;
 }
 
 uint8_t OneWire_CRC8_Update(uint8_t *buffer, size_t len) {
-  uint8_t crc = 0, i = 0, j = 0;
+  uint8_t crc = 0;
   
-  for (i = 0; i < len; i++) {
-    crc ^= buffer[i];
-    for (j = 0; j < 8; j++) {
+  do {
+    uint8_t i = 8;
+    crc ^= *(buffer++);
+    do {
       if (crc & 0x01) {
         crc = (crc >> 1) ^ 0x8c;
       } else {
         crc >>= 1;
       }
-    }
-  }
-  
+    } while (--i);
+  } while (--len);
   return crc;
 }

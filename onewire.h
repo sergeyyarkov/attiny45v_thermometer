@@ -3,13 +3,13 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
-#define OW_LINE PB0
+#define OW_LINE PB4
 #define OW_PIN  PINB
 #define OW_PORT PORTB
 #define OW_DDR  DDRB
 
-#define ow_pull()     (OW_DDR = _BV(OW_LINE))
-#define ow_release()  (OW_DDR = !_BV(OW_LINE))
+#define ow_pull()     (OW_DDR |= _BV(OW_LINE))
+#define ow_release()  (OW_DDR &= !_BV(OW_LINE))
 
 #define ONE_WIRE_READROM    0x33
 #define ONE_WIRE_SKIPROM    0xcc

@@ -1,4 +1,4 @@
-build/default/production/main.o.d build/default/production/main.o: main.c \
+build/default/debug/main.o.d build/default/debug/main.o: main.c \
  /opt/avr8-gnu-toolchain-linux_x86_64/avr/include/avr/io.h \
  /opt/avr8-gnu-toolchain-linux_x86_64/avr/include/avr/sfr_defs.h \
  /opt/avr8-gnu-toolchain-linux_x86_64/avr/include/inttypes.h \

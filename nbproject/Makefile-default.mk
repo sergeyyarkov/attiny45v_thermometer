@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c onewire.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c onewire.c dstemperature.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/onewire.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/onewire.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/onewire.o ${OBJECTDIR}/dstemperature.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/onewire.o.d ${OBJECTDIR}/dstemperature.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/onewire.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/onewire.o ${OBJECTDIR}/dstemperature.o
 
 # Source Files
-SOURCEFILES=main.c onewire.c
+SOURCEFILES=main.c onewire.c dstemperature.c
 
 # Pack Options 
 PACK_COMPILER_OPTIONS=-I "${DFP_DIR}/include"
@@ -122,6 +122,12 @@ ${OBJECTDIR}/onewire.o: onewire.c  .generated_files/flags/default/f032a224192bd1
 	@${RM} ${OBJECTDIR}/onewire.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny45 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/onewire.o.d" -MT "${OBJECTDIR}/onewire.o.d" -MT ${OBJECTDIR}/onewire.o  -o ${OBJECTDIR}/onewire.o onewire.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
 	
+${OBJECTDIR}/dstemperature.o: dstemperature.c  .generated_files/flags/default/80d105638d61b31dfb20a22d20c8ded4b921bb3f .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/dstemperature.o.d 
+	@${RM} ${OBJECTDIR}/dstemperature.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny45 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/dstemperature.o.d" -MT "${OBJECTDIR}/dstemperature.o.d" -MT ${OBJECTDIR}/dstemperature.o  -o ${OBJECTDIR}/dstemperature.o dstemperature.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
+	
 else
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/852a931b512b8c8a6143655dd7f5022a6cb025f5 .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
 	@${MKDIR} "${OBJECTDIR}" 
@@ -134,6 +140,12 @@ ${OBJECTDIR}/onewire.o: onewire.c  .generated_files/flags/default/5312daf68dcab5
 	@${RM} ${OBJECTDIR}/onewire.o.d 
 	@${RM} ${OBJECTDIR}/onewire.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny45 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/onewire.o.d" -MT "${OBJECTDIR}/onewire.o.d" -MT ${OBJECTDIR}/onewire.o  -o ${OBJECTDIR}/onewire.o onewire.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
+	
+${OBJECTDIR}/dstemperature.o: dstemperature.c  .generated_files/flags/default/6842ec3b8e5e6b0b001addd084df5d184933bbe5 .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/dstemperature.o.d 
+	@${RM} ${OBJECTDIR}/dstemperature.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny45 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/dstemperature.o.d" -MT "${OBJECTDIR}/dstemperature.o.d" -MT ${OBJECTDIR}/dstemperature.o  -o ${OBJECTDIR}/dstemperature.o dstemperature.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
 	
 endif
 
