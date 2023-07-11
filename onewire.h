@@ -24,6 +24,7 @@ void OneWire_WriteByte(uint8_t byte);
 uint8_t OneWire_ReadByte();
 uint8_t OneWire_SkipROM();
 uint8_t OneWire_ReadROM(uint8_t *buffer);
+uint8_t OneWire_CRC8_Update(uint8_t *buffer, size_t len);
 
 #endif	/* ONEWIRE_H */
 

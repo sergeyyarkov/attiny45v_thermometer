@@ -73,3 +73,20 @@ uint8_t OneWire_ReadROM(uint8_t *buffer) {
   
   return 1;
 }
+
+uint8_t OneWire_CRC8_Update(uint8_t *buffer, size_t len) {
+  uint8_t crc = 0, i = 0, j = 0;
+  
+  for (i = 0; i < len; i++) {
+    crc ^= buffer[i];
+    for (j = 0; j < 8; j++) {
+      if (crc & 0x01) {
+        crc = (crc >> 1) ^ 0x8c;
+      } else {
+        crc >>= 1;
+      }
+    }
+  }
+  
+  return crc;
+}
