@@ -163,7 +163,7 @@ ${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES
 	${MP_CC} $(MP_EXTRA_LD_PRE) -mmcu=attiny45 ${PACK_COMMON_OPTIONS}   -gdwarf-2 -D__$(MP_PROCESSOR_OPTION)__  -Wl,-Map="${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.map"    -o ${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}      -DXPRJ_default=$(CND_CONF)  -DF_CPU=8000000UL $(COMPARISON_BUILD)  -Wl,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION),--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1 -Wl,--gc-sections -Wl,--start-group  -Wl,-lm -Wl,--end-group 
 	
 	
-	
+	${MP_CC_DIR}/avr-objdump -h -S "${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}" > "${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.lss"
 	
 	
 	
@@ -173,7 +173,7 @@ ${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES
 	${MP_CC} $(MP_EXTRA_LD_PRE) -mmcu=attiny45 ${PACK_COMMON_OPTIONS}  -D__$(MP_PROCESSOR_OPTION)__  -Wl,-Map="${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.map"    -o ${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}      -DXPRJ_default=$(CND_CONF)  -DF_CPU=8000000UL $(COMPARISON_BUILD)  -Wl,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION) -Wl,--gc-sections -Wl,--start-group  -Wl,-lm -Wl,--end-group 
 	${MP_CC_DIR}/avr-objcopy -O ihex "${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}" "${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.hex"
 	
-	
+	${MP_CC_DIR}/avr-objdump -h -S "${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}" > "${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.lss"
 	
 	
 	

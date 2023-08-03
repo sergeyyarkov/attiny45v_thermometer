@@ -1,5 +1,7 @@
 Archive member included to satisfy reference by file (symbol)
 
+/opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
+                              build/default/production/main.o (__udivmodhi4)
 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
                               /home/sergeyyarkov/.mchp_packs/Microchip/ATtiny_DFP/3.0.151/gcc/dev/attiny45/avr25/crtattiny45.o (exit)
 
@@ -16,6 +18,20 @@ Discarded input sections
  .text          0x0000000000000000        0x0 build/default/production/dstemperature.o
  .data          0x0000000000000000        0x0 build/default/production/dstemperature.o
  .bss           0x0000000000000000        0x0 build/default/production/dstemperature.o
+ .text          0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
+ .data          0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
+ .bss           0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.mul
+                0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
+ .text.libgcc   0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.prologue
+                0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.builtins
+                0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.fmul
+                0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
+ .text.libgcc.fixed
+                0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
  .text          0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
  .data          0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
  .bss           0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
@@ -161,7 +177,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0x266
+.text           0x0000000000000000      0x3f8
  *(.vectors)
  .vectors       0x0000000000000000       0x1e /home/sergeyyarkov/.mchp_packs/Microchip/ATtiny_DFP/3.0.151/gcc/dev/attiny45/avr25/crtattiny45.o
                 0x0000000000000000                __vectors
@@ -177,27 +193,29 @@ END GROUP
  *libprintf_flt.a:*(.progmem.data)
  *libc.a:*(.progmem.data)
  *(.progmem*)
-                0x000000000000001e                . = ALIGN (0x2)
+ .progmem.data.display_symbols
+                0x000000000000001e        0xa build/default/production/main.o
+                0x0000000000000028                . = ALIGN (0x2)
  *(.jumptables)
  *(.jumptables*)
  *(.lowtext)
  *(.lowtext*)
-                0x000000000000001e                __ctors_start = .
+                0x0000000000000028                __ctors_start = .
  *(.ctors)
-                0x000000000000001e                __ctors_end = .
-                0x000000000000001e                __dtors_start = .
+                0x0000000000000028                __ctors_end = .
+                0x0000000000000028                __dtors_start = .
  *(.dtors)
-                0x000000000000001e                __dtors_end = .
+                0x0000000000000028                __dtors_end = .
  SORT(*)(.ctors)
  SORT(*)(.dtors)
  *(.init0)
- .init0         0x000000000000001e        0x0 /home/sergeyyarkov/.mchp_packs/Microchip/ATtiny_DFP/3.0.151/gcc/dev/attiny45/avr25/crtattiny45.o
-                0x000000000000001e                __init
+ .init0         0x0000000000000028        0x0 /home/sergeyyarkov/.mchp_packs/Microchip/ATtiny_DFP/3.0.151/gcc/dev/attiny45/avr25/crtattiny45.o
+                0x0000000000000028                __init
  *(.init0)
  *(.init1)
  *(.init1)
  *(.init2)
- .init2         0x000000000000001e        0xc /home/sergeyyarkov/.mchp_packs/Microchip/ATtiny_DFP/3.0.151/gcc/dev/attiny45/avr25/crtattiny45.o
+ .init2         0x0000000000000028        0xc /home/sergeyyarkov/.mchp_packs/Microchip/ATtiny_DFP/3.0.151/gcc/dev/attiny45/avr25/crtattiny45.o
  *(.init2)
  *(.init3)
  *(.init3)
@@ -212,64 +230,88 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x000000000000002a        0x4 /home/sergeyyarkov/.mchp_packs/Microchip/ATtiny_DFP/3.0.151/gcc/dev/attiny45/avr25/crtattiny45.o
+ .init9         0x0000000000000034        0x4 /home/sergeyyarkov/.mchp_packs/Microchip/ATtiny_DFP/3.0.151/gcc/dev/attiny45/avr25/crtattiny45.o
  *(.init9)
  *(.text)
- .text          0x000000000000002e        0x2 /home/sergeyyarkov/.mchp_packs/Microchip/ATtiny_DFP/3.0.151/gcc/dev/attiny45/avr25/crtattiny45.o
-                0x000000000000002e                __vector_1
-                0x000000000000002e                __vector_12
-                0x000000000000002e                __bad_interrupt
-                0x000000000000002e                __vector_6
-                0x000000000000002e                __vector_3
-                0x000000000000002e                __vector_11
-                0x000000000000002e                __vector_13
-                0x000000000000002e                __vector_7
-                0x000000000000002e                __vector_5
-                0x000000000000002e                __vector_4
-                0x000000000000002e                __vector_9
-                0x000000000000002e                __vector_2
-                0x000000000000002e                __vector_8
-                0x000000000000002e                __vector_14
-                0x000000000000002e                __vector_10
-                0x0000000000000030                . = ALIGN (0x2)
+ .text          0x0000000000000038        0x2 /home/sergeyyarkov/.mchp_packs/Microchip/ATtiny_DFP/3.0.151/gcc/dev/attiny45/avr25/crtattiny45.o
+                0x0000000000000038                __vector_1
+                0x0000000000000038                __vector_12
+                0x0000000000000038                __bad_interrupt
+                0x0000000000000038                __vector_6
+                0x0000000000000038                __vector_3
+                0x0000000000000038                __vector_11
+                0x0000000000000038                __vector_13
+                0x0000000000000038                __vector_7
+                0x0000000000000038                __vector_5
+                0x0000000000000038                __vector_4
+                0x0000000000000038                __vector_9
+                0x0000000000000038                __vector_2
+                0x0000000000000038                __vector_8
+                0x0000000000000038                __vector_14
+                0x0000000000000038                __vector_10
+                0x000000000000003a                . = ALIGN (0x2)
  *(.text.*)
+ .text.TWI_Start
+                0x000000000000003a       0x1a build/default/production/main.o
+                0x000000000000003a                TWI_Start
+ .text.TWI_Stop
+                0x0000000000000054       0x1a build/default/production/main.o
+                0x0000000000000054                TWI_Stop
+ .text.TWI_WriteByte
+                0x000000000000006e       0x64 build/default/production/main.o
+                0x000000000000006e                TWI_WriteByte
+ .text.TM1637_WriteByte
+                0x00000000000000d2       0x10 build/default/production/main.o
+                0x00000000000000d2                TM1637_WriteByte
+ .text.TM1637_Init
+                0x00000000000000e2       0x34 build/default/production/main.o
+                0x00000000000000e2                TM1637_Init
+ .text.TM1637_DisplaySymbol
+                0x0000000000000116       0x20 build/default/production/main.o
+                0x0000000000000116                TM1637_DisplaySymbol
+ .text.TM1637_DisplayUInt
+                0x0000000000000136       0x64 build/default/production/main.o
+                0x0000000000000136                TM1637_DisplayUInt
  .text.MCU_Init
-                0x0000000000000030        0x8 build/default/production/main.o
-                0x0000000000000030                MCU_Init
- .text.main     0x0000000000000038       0x26 build/default/production/main.o
-                0x0000000000000038                main
+                0x000000000000019a        0xc build/default/production/main.o
+                0x000000000000019a                MCU_Init
+ .text.main     0x00000000000001a6       0x2a build/default/production/main.o
+                0x00000000000001a6                main
  .text.OneWire_Presence
-                0x000000000000005e       0x36 build/default/production/onewire.o
-                0x000000000000005e                OneWire_Presence
+                0x00000000000001d0       0x34 build/default/production/onewire.o
+                0x00000000000001d0                OneWire_Presence
  .text.OneWire_WriteByte
-                0x0000000000000094       0x3e build/default/production/onewire.o
-                0x0000000000000094                OneWire_WriteByte
+                0x0000000000000204       0x3a build/default/production/onewire.o
+                0x0000000000000204                OneWire_WriteByte
  .text.OneWire_ReadByte
-                0x00000000000000d2       0x34 build/default/production/onewire.o
-                0x00000000000000d2                OneWire_ReadByte
+                0x000000000000023e       0x32 build/default/production/onewire.o
+                0x000000000000023e                OneWire_ReadByte
  .text.OneWire_SkipROM
-                0x0000000000000106       0x10 build/default/production/onewire.o
-                0x0000000000000106                OneWire_SkipROM
+                0x0000000000000270       0x10 build/default/production/onewire.o
+                0x0000000000000270                OneWire_SkipROM
  .text.OneWire_ReadROM
-                0x0000000000000116       0x32 build/default/production/onewire.o
-                0x0000000000000116                OneWire_ReadROM
+                0x0000000000000280       0x32 build/default/production/onewire.o
+                0x0000000000000280                OneWire_ReadROM
  .text.OneWire_CRC8_Update
-                0x0000000000000148       0x2c build/default/production/onewire.o
-                0x0000000000000148                OneWire_CRC8_Update
+                0x00000000000002b2       0x2c build/default/production/onewire.o
+                0x00000000000002b2                OneWire_CRC8_Update
  .text.DallasTemp_ReadScratchpad
-                0x0000000000000174       0x48 build/default/production/dstemperature.o
-                0x0000000000000174                DallasTemp_ReadScratchpad
+                0x00000000000002de       0x48 build/default/production/dstemperature.o
+                0x00000000000002de                DallasTemp_ReadScratchpad
  .text.DallasTemp_Convert
-                0x00000000000001bc       0x14 build/default/production/dstemperature.o
-                0x00000000000001bc                DallasTemp_Convert
+                0x0000000000000326       0x14 build/default/production/dstemperature.o
+                0x0000000000000326                DallasTemp_Convert
  .text.DallasTemp_GetTemperature
-                0x00000000000001d0       0x92 build/default/production/dstemperature.o
-                0x00000000000001d0                DallasTemp_GetTemperature
-                0x0000000000000262                . = ALIGN (0x2)
+                0x000000000000033a       0x92 build/default/production/dstemperature.o
+                0x000000000000033a                DallasTemp_GetTemperature
+ .text.libgcc.div
+                0x00000000000003cc       0x28 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
+                0x00000000000003cc                __udivmodhi4
+                0x00000000000003f4                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000000000000262        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
-                0x0000000000000262                exit
-                0x0000000000000262                _exit
+ .fini9         0x00000000000003f4        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
+                0x00000000000003f4                exit
+                0x00000000000003f4                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -288,11 +330,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000000000000262        0x4 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
+ .fini0         0x00000000000003f4        0x4 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
  *(.fini0)
-                0x0000000000000266                _etext = .
+                0x00000000000003f8                _etext = .
 
-.data           0x0000000000800060        0x0 load address 0x0000000000000266
+.data           0x0000000000800060        0x0 load address 0x00000000000003f8
                 [!provide]                        PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -310,8 +352,8 @@ END GROUP
  *(.bss*)
  *(COMMON)
                 [!provide]                        PROVIDE (__bss_end, .)
-                0x0000000000000266                __data_load_start = LOADADDR (.data)
-                0x0000000000000266                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000000000003f8                __data_load_start = LOADADDR (.data)
+                0x00000000000003f8                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0000000000800060        0x0
                 [!provide]                        PROVIDE (__noinit_start, .)
