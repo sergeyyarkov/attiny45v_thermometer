@@ -16,6 +16,26 @@ uint8_t DallasTemp_ReadScratchpad(uint8_t *scratchpad) {
   return 1;
 }
 
+void DallasTemp_WriteScratchpad(uint8_t *data) {
+  uint8_t i = 3;
+  
+  OneWire_SkipROM();
+  OneWire_WriteByte(DS18B20_CMD_WSCRATCHPAD);
+  
+  do {
+    OneWire_WriteByte(*data++);
+  } while (--i);
+  
+  OneWire_Presence();
+  
+  
+  // TODO вынести в отдельную функцию DallasTemp_CopyScratchpad
+  OneWire_SkipROM();
+  OneWire_WriteByte(0x48);
+  
+  _delay_ms(10);
+}
+
 uint8_t DallasTemp_Convert(void) {
   if (!OneWire_Presence()) return 0;
   OneWire_WriteByte(ONE_WIRE_SKIPROM);
@@ -23,10 +43,27 @@ uint8_t DallasTemp_Convert(void) {
   return 1;
 }
 
+uint8_t DallasTemp_CheckError(DallasSensor* Sensor) {
+  if (!OneWire_Presence()) return 1;
+  OneWire_ReadROM(Sensor->ROM);
+  if (Sensor->ROM[0] != DS18B20_CONST_FAMILY_CODE) return 1;
+  return 0;
+}
+
 void DallasTemp_GetTemperature(DallasSensor *Sensor) {
   if (!DallasTemp_Convert()) return;
-  _delay_ms(750);
+  _delay_ms(750); // TODO задержку делать в зависимости от разрешения АЦП датчика
   if (!DallasTemp_ReadScratchpad(Sensor->SCRATCHPAD)) return;
   Sensor->TEMPERATURE = ((Sensor->SCRATCHPAD[1] << 8) | Sensor->SCRATCHPAD[0]) / 16;
-  Sensor->TEMPERATURE_FRACTION = ((Sensor->SCRATCHPAD[0] & 0x0f) * 100) / 16;
+  
+  /* 
+   * Двойное дополнение для дробной части если минусовая температура:
+   * проверяем что последние пять битов в старшем байте температуры стоят в единице
+   */
+  if (Sensor->SCRATCHPAD[1] & 0xf8) Sensor->SCRATCHPAD[0] = -Sensor->SCRATCHPAD[0];
+  
+  /**
+   * Получаем дробную часть через битовую маску 0x0f, умножаем для получения точности.
+   */
+  Sensor->TEMPERATURE_FRACTION = ((Sensor->SCRATCHPAD[0] & 0x0f) * 1000) / 16;
 }

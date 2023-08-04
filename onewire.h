@@ -19,11 +19,44 @@
 #ifndef ONEWIRE_H
 #define	ONEWIRE_H
 
+/**
+ * 
+ * @return 
+ */
 uint8_t OneWire_Presence(void);
+
+/**
+ * 
+ * @param byte
+ */
 void OneWire_WriteByte(uint8_t byte);
+
+/**
+ * 
+ * @return 
+ */
 uint8_t OneWire_ReadByte();
+
+/**
+ * 
+ * @return 
+ */
 uint8_t OneWire_SkipROM();
+
+/**
+ * Читает ПЗУ подчиненного устройства. 
+ * Использовать только если на шине одно подчиненной устройство!
+ * @param buffer - куда складывать данные
+ * @return "1" - если успешно прочиталось, "0" - если устройство не ответило
+ */
 uint8_t OneWire_ReadROM(uint8_t *buffer);
+
+/**
+ * 
+ * @param buffer
+ * @param len
+ * @return 
+ */
 uint8_t OneWire_CRC8_Update(uint8_t *buffer, size_t len);
 
 #endif	/* ONEWIRE_H */

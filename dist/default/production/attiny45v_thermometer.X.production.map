@@ -2,6 +2,8 @@ Archive member included to satisfy reference by file (symbol)
 
 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
                               build/default/production/main.o (__udivmodhi4)
+/opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_divmodhi4.o)
+                              build/default/production/main.o (__divmodhi4)
 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
                               /home/sergeyyarkov/.mchp_packs/Microchip/ATtiny_DFP/3.0.151/gcc/dev/attiny45/avr25/crtattiny45.o (exit)
 
@@ -12,12 +14,16 @@ Discarded input sections
  .text          0x0000000000000000        0x0 build/default/production/main.o
  .data          0x0000000000000000        0x0 build/default/production/main.o
  .bss           0x0000000000000000        0x0 build/default/production/main.o
+ .text.TM1637_DisplayInt
+                0x0000000000000000       0x86 build/default/production/main.o
  .text          0x0000000000000000        0x0 build/default/production/onewire.o
  .data          0x0000000000000000        0x0 build/default/production/onewire.o
  .bss           0x0000000000000000        0x0 build/default/production/onewire.o
  .text          0x0000000000000000        0x0 build/default/production/dstemperature.o
  .data          0x0000000000000000        0x0 build/default/production/dstemperature.o
  .bss           0x0000000000000000        0x0 build/default/production/dstemperature.o
+ .text.DallasTemp_WriteScratchpad
+                0x0000000000000000       0x32 build/default/production/dstemperature.o
  .text          0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
  .data          0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
  .bss           0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
@@ -32,6 +38,20 @@ Discarded input sections
                 0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
  .text.libgcc.fixed
                 0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
+ .text          0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_divmodhi4.o)
+ .data          0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_divmodhi4.o)
+ .bss           0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_divmodhi4.o)
+ .text.libgcc.mul
+                0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_divmodhi4.o)
+ .text.libgcc   0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_divmodhi4.o)
+ .text.libgcc.prologue
+                0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_divmodhi4.o)
+ .text.libgcc.builtins
+                0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_divmodhi4.o)
+ .text.libgcc.fmul
+                0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_divmodhi4.o)
+ .text.libgcc.fixed
+                0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_divmodhi4.o)
  .text          0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
  .data          0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
  .bss           0x0000000000000000        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
@@ -177,7 +197,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0x3f8
+.text           0x0000000000000000      0x574
  *(.vectors)
  .vectors       0x0000000000000000       0x1e /home/sergeyyarkov/.mchp_packs/Microchip/ATtiny_DFP/3.0.151/gcc/dev/attiny45/avr25/crtattiny45.o
                 0x0000000000000000                __vectors
@@ -252,66 +272,76 @@ END GROUP
                 0x000000000000003a                . = ALIGN (0x2)
  *(.text.*)
  .text.TWI_Start
-                0x000000000000003a       0x1a build/default/production/main.o
+                0x000000000000003a       0x1e build/default/production/main.o
                 0x000000000000003a                TWI_Start
  .text.TWI_Stop
-                0x0000000000000054       0x1a build/default/production/main.o
-                0x0000000000000054                TWI_Stop
+                0x0000000000000058       0x1e build/default/production/main.o
+                0x0000000000000058                TWI_Stop
  .text.TWI_WriteByte
-                0x000000000000006e       0x64 build/default/production/main.o
-                0x000000000000006e                TWI_WriteByte
+                0x0000000000000076       0x68 build/default/production/main.o
+                0x0000000000000076                TWI_WriteByte
  .text.TM1637_WriteByte
-                0x00000000000000d2       0x10 build/default/production/main.o
-                0x00000000000000d2                TM1637_WriteByte
+                0x00000000000000de       0x10 build/default/production/main.o
+                0x00000000000000de                TM1637_WriteByte
  .text.TM1637_Init
-                0x00000000000000e2       0x34 build/default/production/main.o
-                0x00000000000000e2                TM1637_Init
+                0x00000000000000ee       0x34 build/default/production/main.o
+                0x00000000000000ee                TM1637_Init
  .text.TM1637_DisplaySymbol
-                0x0000000000000116       0x20 build/default/production/main.o
-                0x0000000000000116                TM1637_DisplaySymbol
- .text.TM1637_DisplayUInt
-                0x0000000000000136       0x64 build/default/production/main.o
-                0x0000000000000136                TM1637_DisplayUInt
- .text.MCU_Init
-                0x000000000000019a        0xc build/default/production/main.o
-                0x000000000000019a                MCU_Init
- .text.main     0x00000000000001a6       0x2a build/default/production/main.o
-                0x00000000000001a6                main
+                0x0000000000000122       0x20 build/default/production/main.o
+                0x0000000000000122                TM1637_DisplaySymbol
+ .text.TM1637_DisplayLine
+                0x0000000000000142       0x14 build/default/production/main.o
+                0x0000000000000142                TM1637_DisplayLine
+ .text.get_int_length
+                0x0000000000000156       0x20 build/default/production/main.o
+                0x0000000000000156                get_int_length
+ .text.TM1637_DisplayFixedNum
+                0x0000000000000176      0x120 build/default/production/main.o
+                0x0000000000000176                TM1637_DisplayFixedNum
+ .text.main     0x0000000000000296       0x4a build/default/production/main.o
+                0x0000000000000296                main
  .text.OneWire_Presence
-                0x00000000000001d0       0x34 build/default/production/onewire.o
-                0x00000000000001d0                OneWire_Presence
+                0x00000000000002e0       0x34 build/default/production/onewire.o
+                0x00000000000002e0                OneWire_Presence
  .text.OneWire_WriteByte
-                0x0000000000000204       0x3a build/default/production/onewire.o
-                0x0000000000000204                OneWire_WriteByte
+                0x0000000000000314       0x3a build/default/production/onewire.o
+                0x0000000000000314                OneWire_WriteByte
  .text.OneWire_ReadByte
-                0x000000000000023e       0x32 build/default/production/onewire.o
-                0x000000000000023e                OneWire_ReadByte
+                0x000000000000034e       0x32 build/default/production/onewire.o
+                0x000000000000034e                OneWire_ReadByte
  .text.OneWire_SkipROM
-                0x0000000000000270       0x10 build/default/production/onewire.o
-                0x0000000000000270                OneWire_SkipROM
+                0x0000000000000380       0x10 build/default/production/onewire.o
+                0x0000000000000380                OneWire_SkipROM
  .text.OneWire_ReadROM
-                0x0000000000000280       0x32 build/default/production/onewire.o
-                0x0000000000000280                OneWire_ReadROM
+                0x0000000000000390       0x32 build/default/production/onewire.o
+                0x0000000000000390                OneWire_ReadROM
  .text.OneWire_CRC8_Update
-                0x00000000000002b2       0x2c build/default/production/onewire.o
-                0x00000000000002b2                OneWire_CRC8_Update
+                0x00000000000003c2       0x2c build/default/production/onewire.o
+                0x00000000000003c2                OneWire_CRC8_Update
  .text.DallasTemp_ReadScratchpad
-                0x00000000000002de       0x48 build/default/production/dstemperature.o
-                0x00000000000002de                DallasTemp_ReadScratchpad
+                0x00000000000003ee       0x48 build/default/production/dstemperature.o
+                0x00000000000003ee                DallasTemp_ReadScratchpad
  .text.DallasTemp_Convert
-                0x0000000000000326       0x14 build/default/production/dstemperature.o
-                0x0000000000000326                DallasTemp_Convert
+                0x0000000000000436       0x14 build/default/production/dstemperature.o
+                0x0000000000000436                DallasTemp_Convert
+ .text.DallasTemp_CheckError
+                0x000000000000044a       0x26 build/default/production/dstemperature.o
+                0x000000000000044a                DallasTemp_CheckError
  .text.DallasTemp_GetTemperature
-                0x000000000000033a       0x92 build/default/production/dstemperature.o
-                0x000000000000033a                DallasTemp_GetTemperature
+                0x0000000000000470       0xb2 build/default/production/dstemperature.o
+                0x0000000000000470                DallasTemp_GetTemperature
  .text.libgcc.div
-                0x00000000000003cc       0x28 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
-                0x00000000000003cc                __udivmodhi4
-                0x00000000000003f4                . = ALIGN (0x2)
+                0x0000000000000522       0x28 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
+                0x0000000000000522                __udivmodhi4
+ .text.libgcc.div
+                0x000000000000054a       0x26 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_divmodhi4.o)
+                0x000000000000054a                __divmodhi4
+                0x000000000000054a                _div
+                0x0000000000000570                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000000000003f4        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
-                0x00000000000003f4                exit
-                0x00000000000003f4                _exit
+ .fini9         0x0000000000000570        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
+                0x0000000000000570                exit
+                0x0000000000000570                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -330,11 +360,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000000000003f4        0x4 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
+ .fini0         0x0000000000000570        0x4 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
  *(.fini0)
-                0x00000000000003f8                _etext = .
+                0x0000000000000574                _etext = .
 
-.data           0x0000000000800060        0x0 load address 0x00000000000003f8
+.data           0x0000000000800060        0x0 load address 0x0000000000000574
                 [!provide]                        PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -352,8 +382,8 @@ END GROUP
  *(.bss*)
  *(COMMON)
                 [!provide]                        PROVIDE (__bss_end, .)
-                0x00000000000003f8                __data_load_start = LOADADDR (.data)
-                0x00000000000003f8                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000000000000574                __data_load_start = LOADADDR (.data)
+                0x0000000000000574                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0000000000800060        0x0
                 [!provide]                        PROVIDE (__noinit_start, .)
