@@ -14,12 +14,19 @@
 #ifndef DSTEMPERATURE_H
 #define	DSTEMPERATURE_H
 
+typedef enum DallasSensorError {
+    ERR_NO_PRESENCE         = 0x01,
+    ERR_F_CODE_INVALID      = 0x02,
+    ERR_CRC8_RAM            = 0x03
+} DallasSensorError;
+
 typedef struct DallasSensor {
-  uint8_t SCRATCHPAD[8];             // ОЗУ (T_LSB, T_MSB, TH/USER BYTE 1, TH/USER BYTE 2, CONFIG, RESERVED, RESERVED, RESERVED, CRC8)
-  uint8_t ROM[8];                    // ПЗУ (код семейства, серийный код, CRC8)
-  int16_t TEMPERATURE;               // Температура в градусах цельсия (целая часть)
-  uint16_t TEMPERATURE_FRACTION;     // Дробная часть
-  uint8_t T_NEGATIVE;
+  uint8_t   SCRATCHPAD[8];              // ОЗУ (T_LSB, T_MSB, TH/USER BYTE 1, TH/USER BYTE 2, CONFIG, RESERVED, RESERVED, RESERVED, CRC8)
+  uint8_t   ROM[8];                     // ПЗУ (код семейства, серийный код, CRC8)
+  int16_t   TEMPERATURE;                // Температура в градусах цельсия (целая часть)
+  uint16_t  TEMPERATURE_FRACTION;       // Дробная часть
+  uint8_t   T_NEGATIVE;                 // Минусовая ли температура
+  uint8_t   CRC_ERROR;                  // Ошибка CRC8 ОЗУ
 } DallasSensor;
 
 // TODO сделать чтобы все работало с несколькими датчиками а не с одним (выполнять команду skiprom если один датчик, иначе выбирать к какому датчику обращаться)
@@ -78,7 +85,7 @@ void DallasTemp_GetTemperature(DallasSensor *Sensor);
  * @param Sensor - датчик
  * @return Возвращает "1" если имеются проблемы с датчиком иначе "0"
  */
-uint8_t DallasTemp_CheckError(DallasSensor *Sensor);
+DallasSensorError DallasTemp_CheckError(DallasSensor *Sensor);
 
 #endif	/* DSTEMPERATURE_H */
 

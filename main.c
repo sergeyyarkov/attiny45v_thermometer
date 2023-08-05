@@ -14,6 +14,8 @@
 #define PIN_TWI_CLK     PINB2
 #define TWI_DELAY       5           // uS
 
+#define PIN_LED_ERR     PB3
+
 #define TM1637_DIGITS_COUNT 3
 
 #define TM1637_DATA_CMD     0x40      // Data command setting
@@ -209,17 +211,17 @@ void TM1637_DisplayFixedNum(int16_t num, uint8_t frac, uint8_t presicion, uint8_
   }  
   
   while (i < TM1637_DIGITS_COUNT) {
+    if (is_signed && j == 0) {
+      TM1637_DisplaySymbol(0x40, 0);
+      i++;
+      j++;
+      continue;
+    }
     TM1637_DisplaySymbol(
             (j == TM1637_DIGITS_COUNT - 1 - presicion && TM1637_DIGITS_COUNT != length) 
             ? get_symbol(buffer[i]) | (is_overflow && is_signed ? 0 : 0x80) // точка
             : get_symbol(buffer[i]),
             j);
-    
-    if (j == 0) {
-      if (is_signed) {
-        TM1637_DisplaySymbol(0x40, 0);
-      }
-    }
     i++;
     j++;
   }
@@ -228,6 +230,9 @@ void TM1637_DisplayFixedNum(int16_t num, uint8_t frac, uint8_t presicion, uint8_
 }
 
 int main(void) {
+  DDRB |= _BV(PIN_LED_ERR);
+  PORTB &= ~_BV(PIN_LED_ERR);
+  
   DallasSensor Sensor_01;
   DallasTemp_SetResolution(&Sensor_01, DS_TEMP_ADC_RESOLUTION_11);
   
@@ -236,11 +241,16 @@ int main(void) {
   
   while (1) {
     /**
-     * Проверка датчика
+     * Обработка ошибки датчика
      */
-    if (DallasTemp_CheckError(&Sensor_01)) {
-      TM1637_DisplayLine();
+    DallasSensorError error = DallasTemp_CheckError(&Sensor_01);
+    if (error) {
+      PORTB |= _BV(PIN_LED_ERR);
+      TM1637_DisplayInt(error);
+      _delay_ms(100);
       continue;
+    } else {
+      PORTB &= ~_BV(PIN_LED_ERR);
     }
     
     /**

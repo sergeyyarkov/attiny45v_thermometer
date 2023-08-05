@@ -71,10 +71,18 @@ uint8_t DallasTemp_Convert(void) {
   return 1;
 }
 
-uint8_t DallasTemp_CheckError(DallasSensor* Sensor) {
-  if (!OneWire_Presence()) return 1;
+DallasSensorError DallasTemp_CheckError(DallasSensor* Sensor) {
+  /* Нету присутствия */
+  if (!OneWire_Presence()) return ERR_NO_PRESENCE;
+  
+  /* Семейный код неверный */
   OneWire_ReadROM(Sensor->ROM);
-  if (Sensor->ROM[0] != DS18B20_CONST_FAMILY_CODE) return 1;
+  if (Sensor->ROM[0] != DS18B20_CONST_FAMILY_CODE) return ERR_F_CODE_INVALID;
+  
+  /* Ошибка CRC8 для ОЗУ */
+  if (!DallasTemp_ReadScratchpad(Sensor->SCRATCHPAD)) return ERR_CRC8_RAM;
+  
+  /* Все ОК */
   return 0;
 }
 
@@ -91,7 +99,13 @@ void DallasTemp_GetTemperature(DallasSensor *Sensor) {
     _delay_ms(94);
   }
   
-  if (!DallasTemp_ReadScratchpad(Sensor->SCRATCHPAD)) return;
+  if (!DallasTemp_ReadScratchpad(Sensor->SCRATCHPAD)) {
+    Sensor->CRC_ERROR = 1;
+    return;
+  }
+  
+  
+  Sensor->CRC_ERROR = 0;
   Sensor->TEMPERATURE = ((Sensor->SCRATCHPAD[1] << 8) | Sensor->SCRATCHPAD[0]) / 16;
   
   /* 
