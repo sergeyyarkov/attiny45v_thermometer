@@ -164,7 +164,7 @@ void TM1637_DisplayInt(int16_t num) {
   
   if (is_signed) {
     tmp = -tmp;
-    TM1637_DisplaySymbol(0x40, 0); // sign symbol
+    TM1637_DisplaySymbol(0x40, 0);
   }
   
   do {
@@ -174,8 +174,9 @@ void TM1637_DisplayInt(int16_t num) {
   } while (--i);
 }
 
-uint8_t get_int_length(uint16_t num) {
+uint8_t get_int_length(int16_t num) {
   uint8_t l = 1;
+  if (num < 0) num = -num;
   while (num > 9) {
     num /= 10;
     l++;
@@ -183,10 +184,8 @@ uint8_t get_int_length(uint16_t num) {
   return l;
 }
 
-
-// TODO сделать отображение минусовой температуры для этой функции
-void TM1637_DisplayFixedNum(int16_t num, uint8_t frac, uint8_t presicion) {
-  uint8_t is_signed = (num < 0) | (num == 0 && frac > 0);
+void TM1637_DisplayFixedNum(int16_t num, uint8_t frac, uint8_t presicion, uint8_t sign) {
+  uint8_t is_signed = (num < 0) | (sign);
   num = num > 999 ? 999 : num;
   
   if (is_signed) {
@@ -194,7 +193,8 @@ void TM1637_DisplayFixedNum(int16_t num, uint8_t frac, uint8_t presicion) {
   }
   
   uint8_t length = get_int_length(num);
-  uint8_t i = TM1637_DIGITS_COUNT, j = 0;
+  uint8_t is_overflow = length + 1 == TM1637_DIGITS_COUNT;
+  uint8_t i = TM1637_DIGITS_COUNT, j = is_overflow && is_signed ? 1 : 0;
   uint8_t buffer[TM1637_DIGITS_COUNT];
   
   do {
@@ -209,19 +209,17 @@ void TM1637_DisplayFixedNum(int16_t num, uint8_t frac, uint8_t presicion) {
   }  
   
   while (i < TM1637_DIGITS_COUNT) {
-//    if (j == 0) {
-////      if (is_signed) {
-////        TM1637_DisplaySymbol(0x40, 0);
-////      }
-//      i++;
-//      j++;
-//      continue;
-//    }
     TM1637_DisplaySymbol(
             (j == TM1637_DIGITS_COUNT - 1 - presicion && TM1637_DIGITS_COUNT != length) 
-            ? get_symbol(buffer[i]) | 0x80 // точка
+            ? get_symbol(buffer[i]) | (is_overflow && is_signed ? 0 : 0x80) // точка
             : get_symbol(buffer[i]),
             j);
+    
+    if (j == 0) {
+      if (is_signed) {
+        TM1637_DisplaySymbol(0x40, 0);
+      }
+    }
     i++;
     j++;
   }
@@ -231,12 +229,11 @@ void TM1637_DisplayFixedNum(int16_t num, uint8_t frac, uint8_t presicion) {
 
 int main(void) {
   DallasSensor Sensor_01;
-  
-  DallasTemp_SetResolution(&Sensor_01, 11);
+  DallasTemp_SetResolution(&Sensor_01, DS_TEMP_ADC_RESOLUTION_11);
   
   TM1637_Init(PORT_TWI_DIO, PORT_TWI_CLK, TM1637_BRIGHTNESS_2, TM1637_DISP_ON);
   TM1637_DisplayLine();
-       
+  
   while (1) {
     /**
      * Проверка датчика
@@ -250,7 +247,7 @@ int main(void) {
      * Получение температуры и вывод на индикатор
      */
     DallasTemp_GetTemperature(&Sensor_01);
-    TM1637_DisplayFixedNum(Sensor_01.TEMPERATURE, Sensor_01.TEMPERATURE_FRACTION / 100, 1);
+    TM1637_DisplayFixedNum(Sensor_01.TEMPERATURE, Sensor_01.TEMPERATURE_FRACTION / 100, 1, Sensor_01.T_NEGATIVE);
   }
   return 0;
 }

@@ -6,6 +6,11 @@
 #define DS18B20_CMD_CPSCRATCHPAD    0x48
 #define DS18B20_CONST_FAMILY_CODE   0x28
 
+#define DS_TEMP_ADC_RESOLUTION_12   12
+#define DS_TEMP_ADC_RESOLUTION_11   11
+#define DS_TEMP_ADC_RESOLUTION_10   10
+#define DS_TEMP_ADC_RESOLUTION_9    9
+
 #ifndef DSTEMPERATURE_H
 #define	DSTEMPERATURE_H
 
@@ -14,6 +19,7 @@ typedef struct DallasSensor {
   uint8_t ROM[8];                    // ПЗУ (код семейства, серийный код, CRC8)
   int16_t TEMPERATURE;               // Температура в градусах цельсия (целая часть)
   uint16_t TEMPERATURE_FRACTION;     // Дробная часть
+  uint8_t T_NEGATIVE;
 } DallasSensor;
 
 // TODO сделать чтобы все работало с несколькими датчиками а не с одним (выполнять команду skiprom если один датчик, иначе выбирать к какому датчику обращаться)
@@ -56,9 +62,16 @@ void DallasTemp_SetResolution(DallasSensor *Sensor, uint8_t r);
 
 /**
  * Получает оцифрованное значение датчика и конвертирует занчение в читаемый вид.
- * @param Sensor - датчика
+ * @param Sensor - датчик
  */
 void DallasTemp_GetTemperature(DallasSensor *Sensor);
+
+/**
+ * Преобразует целую и дробную часть в тип числа с плавающей точкой
+ * @param Sensor - датчик
+ * @return Возвращает температуру
+ */
+//float DallasTemp_GetFloatTemperature(DallasSensor *Sensor);
 
 /**
  * Читает семейный код датчика и проверяет его правильность

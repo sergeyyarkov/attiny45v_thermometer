@@ -98,10 +98,20 @@ void DallasTemp_GetTemperature(DallasSensor *Sensor) {
    * Двойное дополнение для дробной части если минусовая температура:
    * проверяем что последние пять битов в старшем байте температуры стоят в единице
    */
-  if (Sensor->SCRATCHPAD[1] & 0xf8) Sensor->SCRATCHPAD[0] = -Sensor->SCRATCHPAD[0];
+  if (!(~Sensor->SCRATCHPAD[1] & 0xf8)) {
+    Sensor->T_NEGATIVE = 1;
+    Sensor->SCRATCHPAD[0] = -Sensor->SCRATCHPAD[0];
+  } else {
+    Sensor->T_NEGATIVE = 0;
+  }
   
   /**
    * Получаем дробную часть через битовую маску 0x0f, умножаем для получения точности.
    */
   Sensor->TEMPERATURE_FRACTION = ((Sensor->SCRATCHPAD[0] & 0x0f) * 1000) / 16;
 }
+
+//float DallasTemp_GetFloatTemperature(DallasSensor *Sensor) {
+//  DallasTemp_GetTemperature(Sensor);
+//  return (float)((float)Sensor->TEMPERATURE + ((float)Sensor->TEMPERATURE_FRACTION / 1000));
+//}
