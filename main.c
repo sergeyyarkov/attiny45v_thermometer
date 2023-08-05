@@ -232,6 +232,8 @@ void TM1637_DisplayFixedNum(int16_t num, uint8_t frac, uint8_t presicion) {
 int main(void) {
   DallasSensor Sensor_01;
   
+  DallasTemp_SetResolution(&Sensor_01, 11);
+  
   TM1637_Init(PORT_TWI_DIO, PORT_TWI_CLK, TM1637_BRIGHTNESS_2, TM1637_DISP_ON);
   TM1637_DisplayLine();
        

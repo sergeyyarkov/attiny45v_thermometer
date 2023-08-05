@@ -16,6 +16,15 @@ uint8_t DallasTemp_ReadScratchpad(uint8_t *scratchpad) {
   return 1;
 }
 
+// TODO parasite power
+uint8_t DallasTemp_CopyScratchpad(void) {
+  if (!OneWire_Presence()) return 0;
+  OneWire_SkipROM();
+  OneWire_WriteByte(DS18B20_CMD_CPSCRATCHPAD);
+  _delay_ms(10);
+  return 1;
+}
+
 void DallasTemp_WriteScratchpad(uint8_t *data) {
   uint8_t i = 3;
   
@@ -26,14 +35,33 @@ void DallasTemp_WriteScratchpad(uint8_t *data) {
     OneWire_WriteByte(*data++);
   } while (--i);
   
-  OneWire_Presence();
+  DallasTemp_CopyScratchpad();
+}
+
+void DallasTemp_SetResolution(DallasSensor *Sensor, uint8_t r) {
+  DallasTemp_ReadScratchpad(Sensor->SCRATCHPAD);
   
+  uint8_t data[3] = { Sensor->SCRATCHPAD[2], Sensor->SCRATCHPAD[3], 0x7f };
   
-  // TODO вынести в отдельную функцию DallasTemp_CopyScratchpad
-  OneWire_SkipROM();
-  OneWire_WriteByte(0x48);
+  switch(r) {
+    case 12:
+      data[2] = 0x7f;
+      break;
+    case 11:
+      data[2] = 0x5f;
+      break;
+    case 10:
+      data[2] = 0x3f;
+      break;
+    case 9:
+      data[2] = 0x1f;
+      break;
+    default:
+      data[2] = 0x7f;
+      break;
+  }
   
-  _delay_ms(10);
+  DallasTemp_WriteScratchpad(data);
 }
 
 uint8_t DallasTemp_Convert(void) {
@@ -52,7 +80,17 @@ uint8_t DallasTemp_CheckError(DallasSensor* Sensor) {
 
 void DallasTemp_GetTemperature(DallasSensor *Sensor) {
   if (!DallasTemp_Convert()) return;
-  _delay_ms(750); // TODO задержку делать в зависимости от разрешения АЦП датчика
+  
+  if (!(~Sensor->SCRATCHPAD[4] & 0x60)) {
+    _delay_ms(750);
+  } else if (!(~Sensor->SCRATCHPAD[4] & 0x40)) {
+    _delay_ms(375);
+  } else if (!(~Sensor->SCRATCHPAD[4] & 0x20)) {
+    _delay_ms(188);
+  } else {
+    _delay_ms(94);
+  }
+  
   if (!DallasTemp_ReadScratchpad(Sensor->SCRATCHPAD)) return;
   Sensor->TEMPERATURE = ((Sensor->SCRATCHPAD[1] << 8) | Sensor->SCRATCHPAD[0]) / 16;
   
