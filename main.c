@@ -187,7 +187,7 @@ uint8_t get_int_length(int16_t num) {
 }
 
 void TM1637_DisplayFixedNum(int16_t num, uint8_t frac, uint8_t presicion, uint8_t sign) {
-  uint8_t is_signed = (num < 0) | (sign);
+  uint8_t is_signed = num < 0 || sign;
   num = num > 999 ? 999 : num;
   
   if (is_signed) {
@@ -220,7 +220,11 @@ void TM1637_DisplayFixedNum(int16_t num, uint8_t frac, uint8_t presicion, uint8_
     TM1637_DisplaySymbol(
             (j == TM1637_DIGITS_COUNT - 1 - presicion && TM1637_DIGITS_COUNT != length) 
             ? get_symbol(buffer[i]) | (is_overflow && is_signed ? 0 : 0x80) // точка
-            : get_symbol(buffer[i]),
+            : (!is_signed &&
+                ((buffer[0] == 0 && buffer[i] == 0 && buffer[i + 1] != 0) || (length == 1 && i != TM1637_DIGITS_COUNT - 1)) // убираем вывод нулей
+                ? 0x00 
+                : get_symbol(buffer[i])
+              ),
             j);
     i++;
     j++;
@@ -241,7 +245,7 @@ int main(void) {
   
   while (1) {
     /**
-     * Обработка ошибки датчика
+     * Обработка ошибки одного датчика
      */
     DallasSensorError error = DallasTemp_CheckError(&Sensor_01);
     if (error) {

@@ -193,7 +193,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0x78e
+.text           0x0000000000000000      0x814
  *(.vectors)
  .vectors       0x0000000000000000       0x1e /home/sergeyyarkov/.mchp_packs/Microchip/ATtiny_DFP/3.0.151/gcc/dev/attiny45/avr25/crtattiny45.o
                 0x0000000000000000                __vectors
@@ -295,61 +295,61 @@ END GROUP
                 0x00000000000001dc       0x2c build/default/production/main.o
                 0x00000000000001dc                get_int_length
  .text.TM1637_DisplayFixedNum
-                0x0000000000000208      0x15c build/default/production/main.o
+                0x0000000000000208      0x1e2 build/default/production/main.o
                 0x0000000000000208                TM1637_DisplayFixedNum
- .text.main     0x0000000000000364       0x70 build/default/production/main.o
-                0x0000000000000364                main
+ .text.main     0x00000000000003ea       0x70 build/default/production/main.o
+                0x00000000000003ea                main
  .text.OneWire_Presence
-                0x00000000000003d4       0x34 build/default/production/onewire.o
-                0x00000000000003d4                OneWire_Presence
+                0x000000000000045a       0x34 build/default/production/onewire.o
+                0x000000000000045a                OneWire_Presence
  .text.OneWire_WriteByte
-                0x0000000000000408       0x3a build/default/production/onewire.o
-                0x0000000000000408                OneWire_WriteByte
+                0x000000000000048e       0x3a build/default/production/onewire.o
+                0x000000000000048e                OneWire_WriteByte
  .text.OneWire_ReadByte
-                0x0000000000000442       0x32 build/default/production/onewire.o
-                0x0000000000000442                OneWire_ReadByte
+                0x00000000000004c8       0x32 build/default/production/onewire.o
+                0x00000000000004c8                OneWire_ReadByte
  .text.OneWire_SkipROM
-                0x0000000000000474       0x10 build/default/production/onewire.o
-                0x0000000000000474                OneWire_SkipROM
+                0x00000000000004fa       0x10 build/default/production/onewire.o
+                0x00000000000004fa                OneWire_SkipROM
  .text.OneWire_ReadROM
-                0x0000000000000484       0x32 build/default/production/onewire.o
-                0x0000000000000484                OneWire_ReadROM
+                0x000000000000050a       0x32 build/default/production/onewire.o
+                0x000000000000050a                OneWire_ReadROM
  .text.OneWire_CRC8_Update
-                0x00000000000004b6       0x2c build/default/production/onewire.o
-                0x00000000000004b6                OneWire_CRC8_Update
+                0x000000000000053c       0x2c build/default/production/onewire.o
+                0x000000000000053c                OneWire_CRC8_Update
  .text.DallasTemp_ReadScratchpad
-                0x00000000000004e2       0x48 build/default/production/dstemperature.o
-                0x00000000000004e2                DallasTemp_ReadScratchpad
+                0x0000000000000568       0x48 build/default/production/dstemperature.o
+                0x0000000000000568                DallasTemp_ReadScratchpad
  .text.DallasTemp_CopyScratchpad
-                0x000000000000052a       0x1e build/default/production/dstemperature.o
-                0x000000000000052a                DallasTemp_CopyScratchpad
+                0x00000000000005b0       0x1e build/default/production/dstemperature.o
+                0x00000000000005b0                DallasTemp_CopyScratchpad
  .text.DallasTemp_WriteScratchpad
-                0x0000000000000548       0x20 build/default/production/dstemperature.o
-                0x0000000000000548                DallasTemp_WriteScratchpad
+                0x00000000000005ce       0x20 build/default/production/dstemperature.o
+                0x00000000000005ce                DallasTemp_WriteScratchpad
  .text.DallasTemp_SetResolution
-                0x0000000000000568       0x62 build/default/production/dstemperature.o
-                0x0000000000000568                DallasTemp_SetResolution
+                0x00000000000005ee       0x62 build/default/production/dstemperature.o
+                0x00000000000005ee                DallasTemp_SetResolution
  .text.DallasTemp_Convert
-                0x00000000000005ca       0x14 build/default/production/dstemperature.o
-                0x00000000000005ca                DallasTemp_Convert
+                0x0000000000000650       0x14 build/default/production/dstemperature.o
+                0x0000000000000650                DallasTemp_Convert
  .text.DallasTemp_CheckError
-                0x00000000000005de       0x34 build/default/production/dstemperature.o
-                0x00000000000005de                DallasTemp_CheckError
+                0x0000000000000664       0x34 build/default/production/dstemperature.o
+                0x0000000000000664                DallasTemp_CheckError
  .text.DallasTemp_GetTemperature
-                0x0000000000000612      0x12a build/default/production/dstemperature.o
-                0x0000000000000612                DallasTemp_GetTemperature
+                0x0000000000000698      0x12a build/default/production/dstemperature.o
+                0x0000000000000698                DallasTemp_GetTemperature
  .text.libgcc.div
-                0x000000000000073c       0x28 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
-                0x000000000000073c                __udivmodhi4
+                0x00000000000007c2       0x28 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_udivmodhi4.o)
+                0x00000000000007c2                __udivmodhi4
  .text.libgcc.div
-                0x0000000000000764       0x26 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_divmodhi4.o)
-                0x0000000000000764                __divmodhi4
-                0x0000000000000764                _div
-                0x000000000000078a                . = ALIGN (0x2)
+                0x00000000000007ea       0x26 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_divmodhi4.o)
+                0x00000000000007ea                __divmodhi4
+                0x00000000000007ea                _div
+                0x0000000000000810                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000000000000078a        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
-                0x000000000000078a                exit
-                0x000000000000078a                _exit
+ .fini9         0x0000000000000810        0x0 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
+                0x0000000000000810                exit
+                0x0000000000000810                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -368,11 +368,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000000000000078a        0x4 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
+ .fini0         0x0000000000000810        0x4 /opt/avr8-gnu-toolchain-linux_x86_64/bin/../lib/gcc/avr/7.3.0/avr25/libgcc.a(_exit.o)
  *(.fini0)
-                0x000000000000078e                _etext = .
+                0x0000000000000814                _etext = .
 
-.data           0x0000000000800060        0x0 load address 0x000000000000078e
+.data           0x0000000000800060        0x0 load address 0x0000000000000814
                 [!provide]                        PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -390,8 +390,8 @@ END GROUP
  *(.bss*)
  *(COMMON)
                 [!provide]                        PROVIDE (__bss_end, .)
-                0x000000000000078e                __data_load_start = LOADADDR (.data)
-                0x000000000000078e                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000000000000814                __data_load_start = LOADADDR (.data)
+                0x0000000000000814                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x0000000000800060        0x0
                 [!provide]                        PROVIDE (__noinit_start, .)

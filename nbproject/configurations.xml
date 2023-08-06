@@ -651,7 +651,7 @@
         <property key="codecoverage.enabled" value="Disable"/>
         <property key="codecoverage.enableoutputtofile" value="false"/>
         <property key="codecoverage.outputfile" value=""/>
-        <property key="communication.interface" value="dw"/>
+        <property key="communication.interface" value="isp"/>
         <property key="communication.interface.jtag" value="2wire"/>
         <property key="communication.speed" value="0.125"/>
         <property key="debugoptions.debug-startup" value="Use system settings"/>
@@ -1159,7 +1159,7 @@
                   value="ToolFirmwareOption.UseLatest"/>
         <property key="ToolFirmwareToolPack"
                   value="Press to select which tool pack to use"/>
-        <property key="communication.interface" value="dw"/>
+        <property key="communication.interface" value="isp"/>
         <property key="communication.interface.jtag" value="2wire"/>
         <property key="communication.speed" value="0.125"/>
         <property key="debugoptions.debug-startup" value="Use system settings"/>
