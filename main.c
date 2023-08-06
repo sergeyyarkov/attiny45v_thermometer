@@ -1,6 +1,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
+#include <avr/wdt.h>
 #include <util/delay.h>
 #include "onewire.h"
 #include "dstemperature.h"
@@ -187,7 +188,7 @@ uint8_t get_int_length(int16_t num) {
 }
 
 void TM1637_DisplayFixedNum(int16_t num, uint8_t frac, uint8_t presicion, uint8_t sign) {
-  uint8_t is_signed = num < 0 || sign;
+  uint8_t is_signed = (num < 0) || (sign);
   num = num > 999 ? 999 : num;
   
   if (is_signed) {
@@ -237,11 +238,16 @@ int main(void) {
   DDRB |= _BV(PIN_LED_ERR);
   PORTB &= ~_BV(PIN_LED_ERR);
   
+  wdt_reset();
+  wdt_enable(WDTO_4S);
+  
   DallasSensor Sensor_01;
   DallasTemp_SetResolution(&Sensor_01, DS_TEMP_ADC_RESOLUTION_11);
   
   TM1637_Init(PORT_TWI_DIO, PORT_TWI_CLK, TM1637_BRIGHTNESS_2, TM1637_DISP_ON);
   TM1637_DisplayLine();
+  
+  _delay_ms(100);
   
   while (1) {
     /**
@@ -251,7 +257,8 @@ int main(void) {
     if (error) {
       PORTB |= _BV(PIN_LED_ERR);
       TM1637_DisplayInt(error);
-      _delay_ms(100);
+      _delay_ms(50);
+      wdt_reset();
       continue;
     } else {
       PORTB &= ~_BV(PIN_LED_ERR);
@@ -262,6 +269,7 @@ int main(void) {
      */
     DallasTemp_GetTemperature(&Sensor_01);
     TM1637_DisplayFixedNum(Sensor_01.TEMPERATURE, Sensor_01.TEMPERATURE_FRACTION / 100, 1, Sensor_01.T_NEGATIVE);
+    wdt_reset();
   }
   return 0;
 }
