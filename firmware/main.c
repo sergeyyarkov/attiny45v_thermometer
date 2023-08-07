@@ -17,7 +17,7 @@
 #define PIN_TWI_CLK     PINB2
 #define TWI_DELAY       5           // uS
 
-#define PIN_LED_ERR     PB3
+#define PIN_LED_ERR     PB1
 
 #define TM1637_DIGITS_COUNT 3
 
@@ -268,10 +268,10 @@ int main(void) {
   PORTB &= ~_BV(PIN_LED_ERR);
   
   wdt_reset();
-  wdt_enable(WDTO_4S);
+  wdt_enable(WDTO_8S);
   
   DallasSensor Sensor_01;
-  DallasTemp_SetResolution(&Sensor_01, DS_TEMP_ADC_RESOLUTION_11);
+  DallasTemp_SetResolution(&Sensor_01, DS_TEMP_ADC_RESOLUTION_12);
   
   TM1637_Init(PORT_TWI_DIO, PORT_TWI_CLK, TM1637_BRIGHTNESS_2, TM1637_DISP_ON);
   TM1637_DisplayLine();
@@ -284,6 +284,8 @@ int main(void) {
         _delay_ms(50);
         wdt_reset();
         continue;
+      } else {
+        _delay_ms(10);
       }
     #endif
     
@@ -292,6 +294,7 @@ int main(void) {
      */
     DallasTemp_GetTemperature(&Sensor_01);
     TM1637_DisplayFixedNum(Sensor_01.TEMPERATURE, Sensor_01.TEMPERATURE_FRACTION / 100, 1, Sensor_01.T_NEGATIVE);
+    
     wdt_reset();
   }
   return 0;

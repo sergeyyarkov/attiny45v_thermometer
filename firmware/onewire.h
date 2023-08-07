@@ -3,7 +3,7 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
-#define OW_LINE PB4
+#define OW_LINE PB3
 #define OW_PIN  PINB
 #define OW_PORT PORTB
 #define OW_DDR  DDRB

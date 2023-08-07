@@ -1,7 +1,7 @@
 #include "dstemperature.h"
 
 uint8_t DallasTemp_ReadScratchpad(uint8_t *scratchpad) {
-  OneWire_SkipROM();
+  if (!OneWire_SkipROM()) return 0;
   OneWire_WriteByte(DS18B20_CMD_RSCRATCHPAD);
   
   for (uint8_t i = 0; i < 8; i++) {
@@ -86,9 +86,14 @@ DallasSensorError DallasTemp_CheckError(DallasSensor* Sensor) {
   return 0;
 }
 
-void DallasTemp_GetTemperature(DallasSensor *Sensor) {
+void DallasTemp_GetTemperature(DallasSensor *Sensor) { 
+  /* Читаем ОЗУ для определения нужной задержки */
+  if (!DallasTemp_ReadScratchpad(Sensor->SCRATCHPAD)) return;
+  
+  /* Оцифровка */
   if (!DallasTemp_Convert()) return;
   
+  /* Ждем необходимое кол-во времени в зависимости от разрядности АЦП */
   if (!(~Sensor->SCRATCHPAD[4] & 0x60)) {
     _delay_ms(750);
   } else if (!(~Sensor->SCRATCHPAD[4] & 0x40)) {
@@ -99,12 +104,12 @@ void DallasTemp_GetTemperature(DallasSensor *Sensor) {
     _delay_ms(94);
   }
   
+  /* Читаем еще раз ОЗУ для получения актуальной температуры и проверки валидности данных */
   if (!DallasTemp_ReadScratchpad(Sensor->SCRATCHPAD)) {
     Sensor->CRC_ERROR = 1;
     return;
   }
-  
-  
+    
   Sensor->CRC_ERROR = 0;
   Sensor->TEMPERATURE = ((Sensor->SCRATCHPAD[1] << 8) | Sensor->SCRATCHPAD[0]) / 16;
   
