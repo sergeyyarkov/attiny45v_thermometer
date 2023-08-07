@@ -6,6 +6,8 @@
 #include "onewire.h"
 #include "dstemperature.h"
 
+#define ENABLE_ERROR_HANDLER 1
+
 #define DDR_TWI         DDRB
 #define PORT_TWI        PORTB
 #define PIN_TWI         PINB
@@ -234,6 +236,33 @@ void TM1637_DisplayFixedNum(int16_t num, uint8_t frac, uint8_t presicion, uint8_
   TM1637_DisplaySymbol(get_symbol(frac), j);
 }
 
+/**
+ * Обработка ошибки одного датчика
+ * @param Sensor - датчик
+ * @return "1" - есть ошибка, "0" - нет ошибки
+ */
+uint8_t SensorErrorHandler(DallasSensor *Sensor) {
+  DallasSensorError error = DallasTemp_CheckError(Sensor);
+  if (error) {
+    switch (error) {
+      case ERR_NO_PRESENCE:
+        PORTB |= _BV(PIN_LED_ERR);
+        TM1637_DisplayInt(error);
+        break;
+      case ERR_F_CODE_INVALID:
+        break;
+      case ERR_CRC8_RAM:
+        break;
+      default:
+        break;
+    }
+    return 1;
+  }
+  
+  PORTB &= ~_BV(PIN_LED_ERR);
+  return 0;
+}
+
 int main(void) {
   DDRB |= _BV(PIN_LED_ERR);
   PORTB &= ~_BV(PIN_LED_ERR);
@@ -250,19 +279,13 @@ int main(void) {
   _delay_ms(100);
   
   while (1) {
-    /**
-     * Обработка ошибки одного датчика
-     */
-    DallasSensorError error = DallasTemp_CheckError(&Sensor_01);
-    if (error) {
-      PORTB |= _BV(PIN_LED_ERR);
-      TM1637_DisplayInt(error);
-      _delay_ms(50);
-      wdt_reset();
-      continue;
-    } else {
-      PORTB &= ~_BV(PIN_LED_ERR);
-    }
+    #if ENABLE_ERROR_HANDLER 
+      if (SensorErrorHandler(&Sensor_01)) {
+        _delay_ms(50);
+        wdt_reset();
+        continue;
+      }
+    #endif
     
     /**
      * Получение температуры и вывод на индикатор

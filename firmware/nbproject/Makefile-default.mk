@@ -30,12 +30,12 @@ ifeq ($(TYPE_IMAGE), DEBUG_RUN)
 IMAGE_TYPE=debug
 OUTPUT_SUFFIX=elf
 DEBUGGABLE_SUFFIX=elf
-FINAL_IMAGE=${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+FINAL_IMAGE=${DISTDIR}/firmware.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 else
 IMAGE_TYPE=production
 OUTPUT_SUFFIX=hex
 DEBUGGABLE_SUFFIX=elf
-FINAL_IMAGE=${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+FINAL_IMAGE=${DISTDIR}/firmware.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 endif
 
 ifeq ($(COMPARE_BUILD), true)
@@ -92,7 +92,7 @@ FIXDEPS=fixDeps
 ifneq ($(INFORMATION_MESSAGE), )
 	@echo $(INFORMATION_MESSAGE)
 endif
-	${MAKE}  -f nbproject/Makefile-default.mk ${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
+	${MAKE}  -f nbproject/Makefile-default.mk ${DISTDIR}/firmware.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 
 MP_PROCESSOR_OPTION=ATtiny45
 # ------------------------------------------------------------------------------------
@@ -110,38 +110,38 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/ebd6578f553cc856320c4e3fab74007688bb7df4 .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
+${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/18f599bddb2372a424a592cb1b143801cd7db1d .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.o.d 
 	@${RM} ${OBJECTDIR}/main.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny45 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/main.o.d" -MT "${OBJECTDIR}/main.o.d" -MT ${OBJECTDIR}/main.o  -o ${OBJECTDIR}/main.o main.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
 	
-${OBJECTDIR}/onewire.o: onewire.c  .generated_files/flags/default/f032a224192bd107f2123e08604a3b5b0f41643c .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
+${OBJECTDIR}/onewire.o: onewire.c  .generated_files/flags/default/cc4122e796c2108754ce016f3c0d3dc9c13879bd .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/onewire.o.d 
 	@${RM} ${OBJECTDIR}/onewire.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny45 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/onewire.o.d" -MT "${OBJECTDIR}/onewire.o.d" -MT ${OBJECTDIR}/onewire.o  -o ${OBJECTDIR}/onewire.o onewire.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
 	
-${OBJECTDIR}/dstemperature.o: dstemperature.c  .generated_files/flags/default/80d105638d61b31dfb20a22d20c8ded4b921bb3f .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
+${OBJECTDIR}/dstemperature.o: dstemperature.c  .generated_files/flags/default/69e466464f473642f912549d7526718e2ab8bdd3 .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/dstemperature.o.d 
 	@${RM} ${OBJECTDIR}/dstemperature.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny45 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/dstemperature.o.d" -MT "${OBJECTDIR}/dstemperature.o.d" -MT ${OBJECTDIR}/dstemperature.o  -o ${OBJECTDIR}/dstemperature.o dstemperature.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
 	
 else
-${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/852a931b512b8c8a6143655dd7f5022a6cb025f5 .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
+${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/e8b0a82687c5817bdc823aa0198151107a4c0b07 .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/main.o.d 
 	@${RM} ${OBJECTDIR}/main.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny45 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/main.o.d" -MT "${OBJECTDIR}/main.o.d" -MT ${OBJECTDIR}/main.o  -o ${OBJECTDIR}/main.o main.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
 	
-${OBJECTDIR}/onewire.o: onewire.c  .generated_files/flags/default/5312daf68dcab5b5e0043f8514afba88eb8ddeb0 .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
+${OBJECTDIR}/onewire.o: onewire.c  .generated_files/flags/default/47a05aa6e2089994b98fb7a7b4c7fb38d19d902f .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/onewire.o.d 
 	@${RM} ${OBJECTDIR}/onewire.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny45 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/onewire.o.d" -MT "${OBJECTDIR}/onewire.o.d" -MT ${OBJECTDIR}/onewire.o  -o ${OBJECTDIR}/onewire.o onewire.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
 	
-${OBJECTDIR}/dstemperature.o: dstemperature.c  .generated_files/flags/default/6842ec3b8e5e6b0b001addd084df5d184933bbe5 .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
+${OBJECTDIR}/dstemperature.o: dstemperature.c  .generated_files/flags/default/ddf87487dd00aa036a9a53dff157eefaf70d8f5f .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/dstemperature.o.d 
 	@${RM} ${OBJECTDIR}/dstemperature.o 
@@ -158,22 +158,22 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: link
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk    
+${DISTDIR}/firmware.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk    
 	@${MKDIR} ${DISTDIR} 
-	${MP_CC} $(MP_EXTRA_LD_PRE) -mmcu=attiny45 ${PACK_COMMON_OPTIONS}   -gdwarf-2 -D__$(MP_PROCESSOR_OPTION)__  -Wl,-Map="${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.map"    -o ${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}      -DXPRJ_default=$(CND_CONF)  -DF_CPU=8000000UL $(COMPARISON_BUILD)  -Wl,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION),--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1 -Wl,--gc-sections -Wl,--start-group  -Wl,-lm -Wl,--end-group 
+	${MP_CC} $(MP_EXTRA_LD_PRE) -mmcu=attiny45 ${PACK_COMMON_OPTIONS}   -gdwarf-2 -D__$(MP_PROCESSOR_OPTION)__  -Wl,-Map="${DISTDIR}/firmware.${IMAGE_TYPE}.map"    -o ${DISTDIR}/firmware.${IMAGE_TYPE}.${OUTPUT_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}      -DXPRJ_default=$(CND_CONF)  -DF_CPU=8000000UL $(COMPARISON_BUILD)  -Wl,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION),--defsym=__ICD2RAM=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1 -Wl,--gc-sections -Wl,--start-group  -Wl,-lm -Wl,--end-group 
 	
 	
-	${MP_CC_DIR}/avr-objdump -h -S "${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}" > "${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.lss"
+	${MP_CC_DIR}/avr-objdump -h -S "${DISTDIR}/firmware.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}" > "${DISTDIR}/firmware.${IMAGE_TYPE}.lss"
 	
 	
 	
 else
-${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk   
+${DISTDIR}/firmware.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk   
 	@${MKDIR} ${DISTDIR} 
-	${MP_CC} $(MP_EXTRA_LD_PRE) -mmcu=attiny45 ${PACK_COMMON_OPTIONS}  -D__$(MP_PROCESSOR_OPTION)__  -Wl,-Map="${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.map"    -o ${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}      -DXPRJ_default=$(CND_CONF)  -DF_CPU=8000000UL $(COMPARISON_BUILD)  -Wl,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION) -Wl,--gc-sections -Wl,--start-group  -Wl,-lm -Wl,--end-group 
-	${MP_CC_DIR}/avr-objcopy -O ihex "${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}" "${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.hex"
+	${MP_CC} $(MP_EXTRA_LD_PRE) -mmcu=attiny45 ${PACK_COMMON_OPTIONS}  -D__$(MP_PROCESSOR_OPTION)__  -Wl,-Map="${DISTDIR}/firmware.${IMAGE_TYPE}.map"    -o ${DISTDIR}/firmware.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX} ${OBJECTFILES_QUOTED_IF_SPACED}      -DXPRJ_default=$(CND_CONF)  -DF_CPU=8000000UL $(COMPARISON_BUILD)  -Wl,--defsym=__MPLAB_BUILD=1$(MP_EXTRA_LD_POST)$(MP_LINKER_FILE_OPTION) -Wl,--gc-sections -Wl,--start-group  -Wl,-lm -Wl,--end-group 
+	${MP_CC_DIR}/avr-objcopy -O ihex "${DISTDIR}/firmware.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}" "${DISTDIR}/firmware.${IMAGE_TYPE}.hex"
 	
-	${MP_CC_DIR}/avr-objdump -h -S "${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}" > "${DISTDIR}/attiny45v_thermometer.X.${IMAGE_TYPE}.lss"
+	${MP_CC_DIR}/avr-objdump -h -S "${DISTDIR}/firmware.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}" > "${DISTDIR}/firmware.${IMAGE_TYPE}.lss"
 	
 	
 	

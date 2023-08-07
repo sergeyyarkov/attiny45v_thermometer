@@ -1,0 +1,1159 @@
+
+dist/default/production/firmware.production.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000848  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  0000089c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  0000089c  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000008cc  2**2
+                  CONTENTS, READONLY
+  4 .debug_info   00000420  00000000  00000000  00000908  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_abbrev 000003e8  00000000  00000000  00000d28  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_line   000000f2  00000000  00000000  00001110  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_str    00000169  00000000  00000000  00001202  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	13 c0       	rjmp	.+38     	; 0x28 <__ctors_end>
+   2:	1a c0       	rjmp	.+52     	; 0x38 <__bad_interrupt>
+   4:	19 c0       	rjmp	.+50     	; 0x38 <__bad_interrupt>
+   6:	18 c0       	rjmp	.+48     	; 0x38 <__bad_interrupt>
+   8:	17 c0       	rjmp	.+46     	; 0x38 <__bad_interrupt>
+   a:	16 c0       	rjmp	.+44     	; 0x38 <__bad_interrupt>
+   c:	15 c0       	rjmp	.+42     	; 0x38 <__bad_interrupt>
+   e:	14 c0       	rjmp	.+40     	; 0x38 <__bad_interrupt>
+  10:	13 c0       	rjmp	.+38     	; 0x38 <__bad_interrupt>
+  12:	12 c0       	rjmp	.+36     	; 0x38 <__bad_interrupt>
+  14:	11 c0       	rjmp	.+34     	; 0x38 <__bad_interrupt>
+  16:	10 c0       	rjmp	.+32     	; 0x38 <__bad_interrupt>
+  18:	0f c0       	rjmp	.+30     	; 0x38 <__bad_interrupt>
+  1a:	0e c0       	rjmp	.+28     	; 0x38 <__bad_interrupt>
+  1c:	0d c0       	rjmp	.+26     	; 0x38 <__bad_interrupt>
+
+0000001e <__trampolines_end>:
+  1e:	3f 06       	cpc	r3, r31
+  20:	5b 4f       	sbci	r21, 0xFB	; 251
+  22:	66 6d       	ori	r22, 0xD6	; 214
+  24:	7d 07       	cpc	r23, r29
+  26:	7f 6f       	ori	r23, 0xFF	; 255
+
+00000028 <__ctors_end>:
+  28:	11 24       	eor	r1, r1
+  2a:	1f be       	out	0x3f, r1	; 63
+  2c:	cf e5       	ldi	r28, 0x5F	; 95
+  2e:	d1 e0       	ldi	r29, 0x01	; 1
+  30:	de bf       	out	0x3e, r29	; 62
+  32:	cd bf       	out	0x3d, r28	; 61
+  34:	ea d1       	rcall	.+980    	; 0x40a <main>
+  36:	06 c4       	rjmp	.+2060   	; 0x844 <_exit>
+
+00000038 <__bad_interrupt>:
+  38:	e3 cf       	rjmp	.-58     	; 0x0 <__vectors>
+
+0000003a <TWI_Start>:
+  3a:	f8 94       	cli
+  3c:	c0 9a       	sbi	0x18, 0	; 24
+  3e:	c2 9a       	sbi	0x18, 2	; 24
+  40:	8d e0       	ldi	r24, 0x0D	; 13
+  42:	8a 95       	dec	r24
+  44:	f1 f7       	brne	.-4      	; 0x42 <__SREG__+0x3>
+  46:	00 00       	nop
+  48:	c0 98       	cbi	0x18, 0	; 24
+  4a:	8d e0       	ldi	r24, 0x0D	; 13
+  4c:	8a 95       	dec	r24
+  4e:	f1 f7       	brne	.-4      	; 0x4c <__SREG__+0xd>
+  50:	00 00       	nop
+  52:	c2 98       	cbi	0x18, 2	; 24
+  54:	78 94       	sei
+  56:	08 95       	ret
+
+00000058 <TWI_Stop>:
+  58:	f8 94       	cli
+  5a:	c2 98       	cbi	0x18, 2	; 24
+  5c:	c0 98       	cbi	0x18, 0	; 24
+  5e:	8d e0       	ldi	r24, 0x0D	; 13
+  60:	8a 95       	dec	r24
+  62:	f1 f7       	brne	.-4      	; 0x60 <TWI_Stop+0x8>
+  64:	00 00       	nop
+  66:	c2 9a       	sbi	0x18, 2	; 24
+  68:	8d e0       	ldi	r24, 0x0D	; 13
+  6a:	8a 95       	dec	r24
+  6c:	f1 f7       	brne	.-4      	; 0x6a <TWI_Stop+0x12>
+  6e:	00 00       	nop
+  70:	c0 9a       	sbi	0x18, 0	; 24
+  72:	78 94       	sei
+  74:	08 95       	ret
+
+00000076 <TWI_WriteByte>:
+  76:	f8 94       	cli
+  78:	2d e0       	ldi	r18, 0x0D	; 13
+  7a:	2a 95       	dec	r18
+  7c:	f1 f7       	brne	.-4      	; 0x7a <TWI_WriteByte+0x4>
+  7e:	00 00       	nop
+  80:	98 e0       	ldi	r25, 0x08	; 8
+  82:	0d c0       	rjmp	.+26     	; 0x9e <TWI_WriteByte+0x28>
+  84:	c0 98       	cbi	0x18, 0	; 24
+  86:	86 95       	lsr	r24
+  88:	2d e0       	ldi	r18, 0x0D	; 13
+  8a:	2a 95       	dec	r18
+  8c:	f1 f7       	brne	.-4      	; 0x8a <TWI_WriteByte+0x14>
+  8e:	00 00       	nop
+  90:	c2 9a       	sbi	0x18, 2	; 24
+  92:	2d e0       	ldi	r18, 0x0D	; 13
+  94:	2a 95       	dec	r18
+  96:	f1 f7       	brne	.-4      	; 0x94 <TWI_WriteByte+0x1e>
+  98:	00 00       	nop
+  9a:	91 50       	subi	r25, 0x01	; 1
+  9c:	49 f0       	breq	.+18     	; 0xb0 <TWI_WriteByte+0x3a>
+  9e:	c2 98       	cbi	0x18, 2	; 24
+  a0:	2d e0       	ldi	r18, 0x0D	; 13
+  a2:	2a 95       	dec	r18
+  a4:	f1 f7       	brne	.-4      	; 0xa2 <TWI_WriteByte+0x2c>
+  a6:	00 00       	nop
+  a8:	80 ff       	sbrs	r24, 0
+  aa:	ec cf       	rjmp	.-40     	; 0x84 <TWI_WriteByte+0xe>
+  ac:	c0 9a       	sbi	0x18, 0	; 24
+  ae:	eb cf       	rjmp	.-42     	; 0x86 <TWI_WriteByte+0x10>
+  b0:	b8 98       	cbi	0x17, 0	; 23
+  b2:	c2 98       	cbi	0x18, 2	; 24
+  b4:	c0 9a       	sbi	0x18, 0	; 24
+  b6:	8d e0       	ldi	r24, 0x0D	; 13
+  b8:	8a 95       	dec	r24
+  ba:	f1 f7       	brne	.-4      	; 0xb8 <TWI_WriteByte+0x42>
+  bc:	00 00       	nop
+  be:	86 b3       	in	r24, 0x16	; 22
+  c0:	c2 9a       	sbi	0x18, 2	; 24
+  c2:	9d e0       	ldi	r25, 0x0D	; 13
+  c4:	9a 95       	dec	r25
+  c6:	f1 f7       	brne	.-4      	; 0xc4 <TWI_WriteByte+0x4e>
+  c8:	00 00       	nop
+  ca:	c2 98       	cbi	0x18, 2	; 24
+  cc:	2d e0       	ldi	r18, 0x0D	; 13
+  ce:	2a 95       	dec	r18
+  d0:	f1 f7       	brne	.-4      	; 0xce <TWI_WriteByte+0x58>
+  d2:	00 00       	nop
+  d4:	b8 9a       	sbi	0x17, 0	; 23
+  d6:	78 94       	sei
+  d8:	80 95       	com	r24
+  da:	81 70       	andi	r24, 0x01	; 1
+  dc:	08 95       	ret
+
+000000de <TM1637_WriteByte>:
+  de:	cf 93       	push	r28
+  e0:	c8 2f       	mov	r28, r24
+  e2:	ab df       	rcall	.-170    	; 0x3a <TWI_Start>
+  e4:	8c 2f       	mov	r24, r28
+  e6:	c7 df       	rcall	.-114    	; 0x76 <TWI_WriteByte>
+  e8:	b7 df       	rcall	.-146    	; 0x58 <TWI_Stop>
+  ea:	cf 91       	pop	r28
+  ec:	08 95       	ret
+
+000000ee <TM1637_Init>:
+  ee:	97 b3       	in	r25, 0x17	; 23
+  f0:	a1 e0       	ldi	r26, 0x01	; 1
+  f2:	b0 e0       	ldi	r27, 0x00	; 0
+  f4:	fd 01       	movw	r30, r26
+  f6:	02 c0       	rjmp	.+4      	; 0xfc <TM1637_Init+0xe>
+  f8:	ee 0f       	add	r30, r30
+  fa:	ff 1f       	adc	r31, r31
+  fc:	8a 95       	dec	r24
+  fe:	e2 f7       	brpl	.-8      	; 0xf8 <TM1637_Init+0xa>
+ 100:	02 c0       	rjmp	.+4      	; 0x106 <__DATA_REGION_LENGTH__+0x6>
+ 102:	aa 0f       	add	r26, r26
+ 104:	bb 1f       	adc	r27, r27
+ 106:	6a 95       	dec	r22
+ 108:	e2 f7       	brpl	.-8      	; 0x102 <__DATA_REGION_LENGTH__+0x2>
+ 10a:	ea 2b       	or	r30, r26
+ 10c:	9e 2b       	or	r25, r30
+ 10e:	97 bb       	out	0x17, r25	; 23
+ 110:	88 b3       	in	r24, 0x18	; 24
+ 112:	e0 95       	com	r30
+ 114:	e8 23       	and	r30, r24
+ 116:	e8 bb       	out	0x18, r30	; 24
+ 118:	84 2f       	mov	r24, r20
+ 11a:	80 68       	ori	r24, 0x80	; 128
+ 11c:	82 2b       	or	r24, r18
+ 11e:	df df       	rcall	.-66     	; 0xde <TM1637_WriteByte>
+ 120:	08 95       	ret
+
+00000122 <TM1637_DisplaySymbol>:
+ 122:	cf 93       	push	r28
+ 124:	df 93       	push	r29
+ 126:	c8 2f       	mov	r28, r24
+ 128:	d6 2f       	mov	r29, r22
+ 12a:	80 e4       	ldi	r24, 0x40	; 64
+ 12c:	d8 df       	rcall	.-80     	; 0xde <TM1637_WriteByte>
+ 12e:	85 df       	rcall	.-246    	; 0x3a <TWI_Start>
+ 130:	8d 2f       	mov	r24, r29
+ 132:	80 6c       	ori	r24, 0xC0	; 192
+ 134:	a0 df       	rcall	.-192    	; 0x76 <TWI_WriteByte>
+ 136:	8c 2f       	mov	r24, r28
+ 138:	9e df       	rcall	.-196    	; 0x76 <TWI_WriteByte>
+ 13a:	8e df       	rcall	.-228    	; 0x58 <TWI_Stop>
+ 13c:	df 91       	pop	r29
+ 13e:	cf 91       	pop	r28
+ 140:	08 95       	ret
+
+00000142 <TM1637_DisplayLine>:
+ 142:	62 e0       	ldi	r22, 0x02	; 2
+ 144:	80 e4       	ldi	r24, 0x40	; 64
+ 146:	ed df       	rcall	.-38     	; 0x122 <TM1637_DisplaySymbol>
+ 148:	61 e0       	ldi	r22, 0x01	; 1
+ 14a:	80 e4       	ldi	r24, 0x40	; 64
+ 14c:	ea df       	rcall	.-44     	; 0x122 <TM1637_DisplaySymbol>
+ 14e:	60 e0       	ldi	r22, 0x00	; 0
+ 150:	80 e4       	ldi	r24, 0x40	; 64
+ 152:	e7 df       	rcall	.-50     	; 0x122 <TM1637_DisplaySymbol>
+ 154:	08 95       	ret
+
+00000156 <TM1637_DisplayInt>:
+ 156:	bf 92       	push	r11
+ 158:	cf 92       	push	r12
+ 15a:	df 92       	push	r13
+ 15c:	ef 92       	push	r14
+ 15e:	ff 92       	push	r15
+ 160:	0f 93       	push	r16
+ 162:	1f 93       	push	r17
+ 164:	cf 93       	push	r28
+ 166:	df 93       	push	r29
+ 168:	8c 01       	movw	r16, r24
+ 16a:	ec 01       	movw	r28, r24
+ 16c:	08 3e       	cpi	r16, 0xE8	; 232
+ 16e:	83 e0       	ldi	r24, 0x03	; 3
+ 170:	18 07       	cpc	r17, r24
+ 172:	14 f0       	brlt	.+4      	; 0x178 <__stack+0x19>
+ 174:	c7 ee       	ldi	r28, 0xE7	; 231
+ 176:	d3 e0       	ldi	r29, 0x03	; 3
+ 178:	11 23       	and	r17, r17
+ 17a:	54 f0       	brlt	.+20     	; 0x190 <__stack+0x31>
+ 17c:	0f 2e       	mov	r0, r31
+ 17e:	f3 e0       	ldi	r31, 0x03	; 3
+ 180:	df 2e       	mov	r13, r31
+ 182:	f0 2d       	mov	r31, r0
+ 184:	0f 2e       	mov	r0, r31
+ 186:	fa e0       	ldi	r31, 0x0A	; 10
+ 188:	ef 2e       	mov	r14, r31
+ 18a:	f1 2c       	mov	r15, r1
+ 18c:	f0 2d       	mov	r31, r0
+ 18e:	17 c0       	rjmp	.+46     	; 0x1be <__stack+0x5f>
+ 190:	d1 95       	neg	r29
+ 192:	c1 95       	neg	r28
+ 194:	d1 09       	sbc	r29, r1
+ 196:	60 e0       	ldi	r22, 0x00	; 0
+ 198:	80 e4       	ldi	r24, 0x40	; 64
+ 19a:	c3 df       	rcall	.-122    	; 0x122 <TM1637_DisplaySymbol>
+ 19c:	ef cf       	rjmp	.-34     	; 0x17c <__stack+0x1d>
+ 19e:	da 94       	dec	r13
+ 1a0:	ce 01       	movw	r24, r28
+ 1a2:	b7 01       	movw	r22, r14
+ 1a4:	3c d3       	rcall	.+1656   	; 0x81e <__divmodhi4>
+ 1a6:	b6 2e       	mov	r11, r22
+ 1a8:	c7 2e       	mov	r12, r23
+ 1aa:	82 5e       	subi	r24, 0xE2	; 226
+ 1ac:	9f 4f       	sbci	r25, 0xFF	; 255
+ 1ae:	fc 01       	movw	r30, r24
+ 1b0:	84 91       	lpm	r24, Z
+ 1b2:	6d 2d       	mov	r22, r13
+ 1b4:	b6 df       	rcall	.-148    	; 0x122 <TM1637_DisplaySymbol>
+ 1b6:	cb 2d       	mov	r28, r11
+ 1b8:	dc 2d       	mov	r29, r12
+ 1ba:	dd 20       	and	r13, r13
+ 1bc:	29 f0       	breq	.+10     	; 0x1c8 <__stack+0x69>
+ 1be:	11 23       	and	r17, r17
+ 1c0:	74 f7       	brge	.-36     	; 0x19e <__stack+0x3f>
+ 1c2:	e1 e0       	ldi	r30, 0x01	; 1
+ 1c4:	de 12       	cpse	r13, r30
+ 1c6:	eb cf       	rjmp	.-42     	; 0x19e <__stack+0x3f>
+ 1c8:	df 91       	pop	r29
+ 1ca:	cf 91       	pop	r28
+ 1cc:	1f 91       	pop	r17
+ 1ce:	0f 91       	pop	r16
+ 1d0:	ff 90       	pop	r15
+ 1d2:	ef 90       	pop	r14
+ 1d4:	df 90       	pop	r13
+ 1d6:	cf 90       	pop	r12
+ 1d8:	bf 90       	pop	r11
+ 1da:	08 95       	ret
+
+000001dc <get_int_length>:
+ 1dc:	99 23       	and	r25, r25
+ 1de:	84 f0       	brlt	.+32     	; 0x200 <get_int_length+0x24>
+ 1e0:	21 e0       	ldi	r18, 0x01	; 1
+ 1e2:	8a 30       	cpi	r24, 0x0A	; 10
+ 1e4:	91 05       	cpc	r25, r1
+ 1e6:	54 f0       	brlt	.+20     	; 0x1fc <get_int_length+0x20>
+ 1e8:	21 e0       	ldi	r18, 0x01	; 1
+ 1ea:	ea e0       	ldi	r30, 0x0A	; 10
+ 1ec:	f0 e0       	ldi	r31, 0x00	; 0
+ 1ee:	bf 01       	movw	r22, r30
+ 1f0:	16 d3       	rcall	.+1580   	; 0x81e <__divmodhi4>
+ 1f2:	cb 01       	movw	r24, r22
+ 1f4:	2f 5f       	subi	r18, 0xFF	; 255
+ 1f6:	6a 30       	cpi	r22, 0x0A	; 10
+ 1f8:	71 05       	cpc	r23, r1
+ 1fa:	cc f7       	brge	.-14     	; 0x1ee <get_int_length+0x12>
+ 1fc:	82 2f       	mov	r24, r18
+ 1fe:	08 95       	ret
+ 200:	91 95       	neg	r25
+ 202:	81 95       	neg	r24
+ 204:	91 09       	sbc	r25, r1
+ 206:	ec cf       	rjmp	.-40     	; 0x1e0 <get_int_length+0x4>
+
+00000208 <TM1637_DisplayFixedNum>:
+ 208:	7f 92       	push	r7
+ 20a:	8f 92       	push	r8
+ 20c:	9f 92       	push	r9
+ 20e:	af 92       	push	r10
+ 210:	bf 92       	push	r11
+ 212:	cf 92       	push	r12
+ 214:	df 92       	push	r13
+ 216:	ef 92       	push	r14
+ 218:	ff 92       	push	r15
+ 21a:	0f 93       	push	r16
+ 21c:	1f 93       	push	r17
+ 21e:	cf 93       	push	r28
+ 220:	df 93       	push	r29
+ 222:	00 d0       	rcall	.+0      	; 0x224 <TM1637_DisplayFixedNum+0x1c>
+ 224:	1f 92       	push	r1
+ 226:	cd b7       	in	r28, 0x3d	; 61
+ 228:	de b7       	in	r29, 0x3e	; 62
+ 22a:	f6 2e       	mov	r15, r22
+ 22c:	94 2e       	mov	r9, r20
+ 22e:	e2 2e       	mov	r14, r18
+ 230:	99 23       	and	r25, r25
+ 232:	0c f4       	brge	.+2      	; 0x236 <TM1637_DisplayFixedNum+0x2e>
+ 234:	4d c0       	rjmp	.+154    	; 0x2d0 <TM1637_DisplayFixedNum+0xc8>
+ 236:	21 e0       	ldi	r18, 0x01	; 1
+ 238:	e1 10       	cpse	r14, r1
+ 23a:	01 c0       	rjmp	.+2      	; 0x23e <TM1637_DisplayFixedNum+0x36>
+ 23c:	20 e0       	ldi	r18, 0x00	; 0
+ 23e:	6c 01       	movw	r12, r24
+ 240:	88 3e       	cpi	r24, 0xE8	; 232
+ 242:	93 40       	sbci	r25, 0x03	; 3
+ 244:	34 f0       	brlt	.+12     	; 0x252 <TM1637_DisplayFixedNum+0x4a>
+ 246:	0f 2e       	mov	r0, r31
+ 248:	f7 ee       	ldi	r31, 0xE7	; 231
+ 24a:	cf 2e       	mov	r12, r31
+ 24c:	f3 e0       	ldi	r31, 0x03	; 3
+ 24e:	df 2e       	mov	r13, r31
+ 250:	f0 2d       	mov	r31, r0
+ 252:	e1 10       	cpse	r14, r1
+ 254:	08 c0       	rjmp	.+16     	; 0x266 <TM1637_DisplayFixedNum+0x5e>
+ 256:	c6 01       	movw	r24, r12
+ 258:	c1 df       	rcall	.-126    	; 0x1dc <get_int_length>
+ 25a:	b8 2e       	mov	r11, r24
+ 25c:	52 e0       	ldi	r21, 0x02	; 2
+ 25e:	85 13       	cpse	r24, r21
+ 260:	4c c0       	rjmp	.+152    	; 0x2fa <TM1637_DisplayFixedNum+0xf2>
+ 262:	10 e0       	ldi	r17, 0x00	; 0
+ 264:	4b c0       	rjmp	.+150    	; 0x2fc <TM1637_DisplayFixedNum+0xf4>
+ 266:	e2 2e       	mov	r14, r18
+ 268:	3f c0       	rjmp	.+126    	; 0x2e8 <TM1637_DisplayFixedNum+0xe0>
+ 26a:	0b 2d       	mov	r16, r11
+ 26c:	63 c0       	rjmp	.+198    	; 0x334 <TM1637_DisplayFixedNum+0x12c>
+ 26e:	68 2d       	mov	r22, r8
+ 270:	80 e4       	ldi	r24, 0x40	; 64
+ 272:	57 df       	rcall	.-338    	; 0x122 <TM1637_DisplaySymbol>
+ 274:	81 e0       	ldi	r24, 0x01	; 1
+ 276:	80 0f       	add	r24, r16
+ 278:	1e 2d       	mov	r17, r14
+ 27a:	96 c0       	rjmp	.+300    	; 0x3a8 <TM1637_DisplayFixedNum+0x1a0>
+ 27c:	e3 e0       	ldi	r30, 0x03	; 3
+ 27e:	be 12       	cpse	r11, r30
+ 280:	a2 c0       	rjmp	.+324    	; 0x3c6 <TM1637_DisplayFixedNum+0x1be>
+ 282:	e1 10       	cpse	r14, r1
+ 284:	81 c0       	rjmp	.+258    	; 0x388 <TM1637_DisplayFixedNum+0x180>
+ 286:	a1 10       	cpse	r10, r1
+ 288:	7f c0       	rjmp	.+254    	; 0x388 <TM1637_DisplayFixedNum+0x180>
+ 28a:	65 c0       	rjmp	.+202    	; 0x356 <TM1637_DisplayFixedNum+0x14e>
+ 28c:	88 2d       	mov	r24, r8
+ 28e:	e1 10       	cpse	r14, r1
+ 290:	aa c0       	rjmp	.+340    	; 0x3e6 <TM1637_DisplayFixedNum+0x1de>
+ 292:	89 2d       	mov	r24, r9
+ 294:	a8 c0       	rjmp	.+336    	; 0x3e6 <TM1637_DisplayFixedNum+0x1de>
+ 296:	87 2d       	mov	r24, r7
+ 298:	02 30       	cpi	r16, 0x02	; 2
+ 29a:	09 f0       	breq	.+2      	; 0x29e <TM1637_DisplayFixedNum+0x96>
+ 29c:	80 c0       	rjmp	.+256    	; 0x39e <TM1637_DisplayFixedNum+0x196>
+ 29e:	74 c0       	rjmp	.+232    	; 0x388 <TM1637_DisplayFixedNum+0x180>
+ 2a0:	ef 2d       	mov	r30, r15
+ 2a2:	f0 e0       	ldi	r31, 0x00	; 0
+ 2a4:	e2 5e       	subi	r30, 0xE2	; 226
+ 2a6:	ff 4f       	sbci	r31, 0xFF	; 255
+ 2a8:	84 91       	lpm	r24, Z
+ 2aa:	61 2f       	mov	r22, r17
+ 2ac:	3a df       	rcall	.-396    	; 0x122 <TM1637_DisplaySymbol>
+ 2ae:	0f 90       	pop	r0
+ 2b0:	0f 90       	pop	r0
+ 2b2:	0f 90       	pop	r0
+ 2b4:	df 91       	pop	r29
+ 2b6:	cf 91       	pop	r28
+ 2b8:	1f 91       	pop	r17
+ 2ba:	0f 91       	pop	r16
+ 2bc:	ff 90       	pop	r15
+ 2be:	ef 90       	pop	r14
+ 2c0:	df 90       	pop	r13
+ 2c2:	cf 90       	pop	r12
+ 2c4:	bf 90       	pop	r11
+ 2c6:	af 90       	pop	r10
+ 2c8:	9f 90       	pop	r9
+ 2ca:	8f 90       	pop	r8
+ 2cc:	7f 90       	pop	r7
+ 2ce:	08 95       	ret
+ 2d0:	6c 01       	movw	r12, r24
+ 2d2:	88 3e       	cpi	r24, 0xE8	; 232
+ 2d4:	93 40       	sbci	r25, 0x03	; 3
+ 2d6:	34 f0       	brlt	.+12     	; 0x2e4 <TM1637_DisplayFixedNum+0xdc>
+ 2d8:	0f 2e       	mov	r0, r31
+ 2da:	f7 ee       	ldi	r31, 0xE7	; 231
+ 2dc:	cf 2e       	mov	r12, r31
+ 2de:	f3 e0       	ldi	r31, 0x03	; 3
+ 2e0:	df 2e       	mov	r13, r31
+ 2e2:	f0 2d       	mov	r31, r0
+ 2e4:	ee 24       	eor	r14, r14
+ 2e6:	e3 94       	inc	r14
+ 2e8:	d1 94       	neg	r13
+ 2ea:	c1 94       	neg	r12
+ 2ec:	d1 08       	sbc	r13, r1
+ 2ee:	c6 01       	movw	r24, r12
+ 2f0:	75 df       	rcall	.-278    	; 0x1dc <get_int_length>
+ 2f2:	b8 2e       	mov	r11, r24
+ 2f4:	52 e0       	ldi	r21, 0x02	; 2
+ 2f6:	11 e0       	ldi	r17, 0x01	; 1
+ 2f8:	85 13       	cpse	r24, r21
+ 2fa:	10 e0       	ldi	r17, 0x00	; 0
+ 2fc:	2a e0       	ldi	r18, 0x0A	; 10
+ 2fe:	30 e0       	ldi	r19, 0x00	; 0
+ 300:	c6 01       	movw	r24, r12
+ 302:	b9 01       	movw	r22, r18
+ 304:	8c d2       	rcall	.+1304   	; 0x81e <__divmodhi4>
+ 306:	8b 83       	std	Y+3, r24	; 0x03
+ 308:	cb 01       	movw	r24, r22
+ 30a:	b9 01       	movw	r22, r18
+ 30c:	88 d2       	rcall	.+1296   	; 0x81e <__divmodhi4>
+ 30e:	8a 83       	std	Y+2, r24	; 0x02
+ 310:	c6 01       	movw	r24, r12
+ 312:	64 e6       	ldi	r22, 0x64	; 100
+ 314:	70 e0       	ldi	r23, 0x00	; 0
+ 316:	83 d2       	rcall	.+1286   	; 0x81e <__divmodhi4>
+ 318:	cb 01       	movw	r24, r22
+ 31a:	b9 01       	movw	r22, r18
+ 31c:	80 d2       	rcall	.+1280   	; 0x81e <__divmodhi4>
+ 31e:	a8 2e       	mov	r10, r24
+ 320:	89 83       	std	Y+1, r24	; 0x01
+ 322:	81 e0       	ldi	r24, 0x01	; 1
+ 324:	b8 16       	cp	r11, r24
+ 326:	09 f4       	brne	.+2      	; 0x32a <TM1637_DisplayFixedNum+0x122>
+ 328:	a0 cf       	rjmp	.-192    	; 0x26a <TM1637_DisplayFixedNum+0x62>
+ 32a:	03 e0       	ldi	r16, 0x03	; 3
+ 32c:	0b 19       	sub	r16, r11
+ 32e:	03 30       	cpi	r16, 0x03	; 3
+ 330:	08 f0       	brcs	.+2      	; 0x334 <TM1637_DisplayFixedNum+0x12c>
+ 332:	b6 cf       	rjmp	.-148    	; 0x2a0 <TM1637_DisplayFixedNum+0x98>
+ 334:	82 e0       	ldi	r24, 0x02	; 2
+ 336:	90 e0       	ldi	r25, 0x00	; 0
+ 338:	6c 01       	movw	r12, r24
+ 33a:	c9 18       	sub	r12, r9
+ 33c:	d1 08       	sbc	r13, r1
+ 33e:	7e 2c       	mov	r7, r14
+ 340:	68 94       	set
+ 342:	99 24       	eor	r9, r9
+ 344:	97 f8       	bld	r9, 7
+ 346:	81 2c       	mov	r8, r1
+ 348:	33 c0       	rjmp	.+102    	; 0x3b0 <TM1637_DisplayFixedNum+0x1a8>
+ 34a:	1c 15       	cp	r17, r12
+ 34c:	1d 04       	cpc	r1, r13
+ 34e:	09 f4       	brne	.+2      	; 0x352 <TM1637_DisplayFixedNum+0x14a>
+ 350:	95 cf       	rjmp	.-214    	; 0x27c <TM1637_DisplayFixedNum+0x74>
+ 352:	a1 10       	cpse	r10, r1
+ 354:	15 c0       	rjmp	.+42     	; 0x380 <TM1637_DisplayFixedNum+0x178>
+ 356:	20 2f       	mov	r18, r16
+ 358:	30 e0       	ldi	r19, 0x00	; 0
+ 35a:	e1 e0       	ldi	r30, 0x01	; 1
+ 35c:	f0 e0       	ldi	r31, 0x00	; 0
+ 35e:	ec 0f       	add	r30, r28
+ 360:	fd 1f       	adc	r31, r29
+ 362:	e2 0f       	add	r30, r18
+ 364:	f3 1f       	adc	r31, r19
+ 366:	80 81       	ld	r24, Z
+ 368:	81 11       	cpse	r24, r1
+ 36a:	0a c0       	rjmp	.+20     	; 0x380 <TM1637_DisplayFixedNum+0x178>
+ 36c:	42 e0       	ldi	r20, 0x02	; 2
+ 36e:	50 e0       	ldi	r21, 0x00	; 0
+ 370:	4c 0f       	add	r20, r28
+ 372:	5d 1f       	adc	r21, r29
+ 374:	24 0f       	add	r18, r20
+ 376:	35 1f       	adc	r19, r21
+ 378:	f9 01       	movw	r30, r18
+ 37a:	90 81       	ld	r25, Z
+ 37c:	91 11       	cpse	r25, r1
+ 37e:	0f c0       	rjmp	.+30     	; 0x39e <TM1637_DisplayFixedNum+0x196>
+ 380:	f1 e0       	ldi	r31, 0x01	; 1
+ 382:	bf 16       	cp	r11, r31
+ 384:	09 f4       	brne	.+2      	; 0x388 <TM1637_DisplayFixedNum+0x180>
+ 386:	87 cf       	rjmp	.-242    	; 0x296 <TM1637_DisplayFixedNum+0x8e>
+ 388:	e1 e0       	ldi	r30, 0x01	; 1
+ 38a:	f0 e0       	ldi	r31, 0x00	; 0
+ 38c:	ec 0f       	add	r30, r28
+ 38e:	fd 1f       	adc	r31, r29
+ 390:	e0 0f       	add	r30, r16
+ 392:	f1 1d       	adc	r31, r1
+ 394:	e0 81       	ld	r30, Z
+ 396:	f0 e0       	ldi	r31, 0x00	; 0
+ 398:	e2 5e       	subi	r30, 0xE2	; 226
+ 39a:	ff 4f       	sbci	r31, 0xFF	; 255
+ 39c:	84 91       	lpm	r24, Z
+ 39e:	61 2f       	mov	r22, r17
+ 3a0:	c0 de       	rcall	.-640    	; 0x122 <TM1637_DisplaySymbol>
+ 3a2:	81 e0       	ldi	r24, 0x01	; 1
+ 3a4:	80 0f       	add	r24, r16
+ 3a6:	1f 5f       	subi	r17, 0xFF	; 255
+ 3a8:	0f 5f       	subi	r16, 0xFF	; 255
+ 3aa:	83 30       	cpi	r24, 0x03	; 3
+ 3ac:	08 f0       	brcs	.+2      	; 0x3b0 <TM1637_DisplayFixedNum+0x1a8>
+ 3ae:	78 cf       	rjmp	.-272    	; 0x2a0 <TM1637_DisplayFixedNum+0x98>
+ 3b0:	ee 20       	and	r14, r14
+ 3b2:	59 f2       	breq	.-106    	; 0x34a <TM1637_DisplayFixedNum+0x142>
+ 3b4:	11 23       	and	r17, r17
+ 3b6:	09 f4       	brne	.+2      	; 0x3ba <TM1637_DisplayFixedNum+0x1b2>
+ 3b8:	5a cf       	rjmp	.-332    	; 0x26e <TM1637_DisplayFixedNum+0x66>
+ 3ba:	1c 15       	cp	r17, r12
+ 3bc:	1d 04       	cpc	r1, r13
+ 3be:	21 f7       	brne	.-56     	; 0x388 <TM1637_DisplayFixedNum+0x180>
+ 3c0:	83 e0       	ldi	r24, 0x03	; 3
+ 3c2:	b8 16       	cp	r11, r24
+ 3c4:	09 f3       	breq	.-62     	; 0x388 <TM1637_DisplayFixedNum+0x180>
+ 3c6:	e1 e0       	ldi	r30, 0x01	; 1
+ 3c8:	f0 e0       	ldi	r31, 0x00	; 0
+ 3ca:	ec 0f       	add	r30, r28
+ 3cc:	fd 1f       	adc	r31, r29
+ 3ce:	e0 0f       	add	r30, r16
+ 3d0:	f1 1d       	adc	r31, r1
+ 3d2:	e0 81       	ld	r30, Z
+ 3d4:	f0 e0       	ldi	r31, 0x00	; 0
+ 3d6:	e2 5e       	subi	r30, 0xE2	; 226
+ 3d8:	ff 4f       	sbci	r31, 0xFF	; 255
+ 3da:	e4 91       	lpm	r30, Z
+ 3dc:	f2 e0       	ldi	r31, 0x02	; 2
+ 3de:	89 2d       	mov	r24, r9
+ 3e0:	bf 16       	cp	r11, r31
+ 3e2:	09 f4       	brne	.+2      	; 0x3e6 <TM1637_DisplayFixedNum+0x1de>
+ 3e4:	53 cf       	rjmp	.-346    	; 0x28c <TM1637_DisplayFixedNum+0x84>
+ 3e6:	8e 2b       	or	r24, r30
+ 3e8:	da cf       	rjmp	.-76     	; 0x39e <TM1637_DisplayFixedNum+0x196>
+
+000003ea <SensorErrorHandler>:
+ 3ea:	56 d1       	rcall	.+684    	; 0x698 <DallasTemp_CheckError>
+ 3ec:	88 23       	and	r24, r24
+ 3ee:	51 f0       	breq	.+20     	; 0x404 <__LOCK_REGION_LENGTH__+0x4>
+ 3f0:	81 30       	cpi	r24, 0x01	; 1
+ 3f2:	11 f0       	breq	.+4      	; 0x3f8 <SensorErrorHandler+0xe>
+ 3f4:	81 e0       	ldi	r24, 0x01	; 1
+ 3f6:	08 95       	ret
+ 3f8:	c3 9a       	sbi	0x18, 3	; 24
+ 3fa:	81 e0       	ldi	r24, 0x01	; 1
+ 3fc:	90 e0       	ldi	r25, 0x00	; 0
+ 3fe:	ab de       	rcall	.-682    	; 0x156 <TM1637_DisplayInt>
+ 400:	81 e0       	ldi	r24, 0x01	; 1
+ 402:	08 95       	ret
+ 404:	c3 98       	cbi	0x18, 3	; 24
+ 406:	80 e0       	ldi	r24, 0x00	; 0
+ 408:	08 95       	ret
+
+0000040a <main>:
+ 40a:	cf 93       	push	r28
+ 40c:	df 93       	push	r29
+ 40e:	cd b7       	in	r28, 0x3d	; 61
+ 410:	de b7       	in	r29, 0x3e	; 62
+ 412:	66 97       	sbiw	r28, 0x16	; 22
+ 414:	0f b6       	in	r0, 0x3f	; 63
+ 416:	f8 94       	cli
+ 418:	de bf       	out	0x3e, r29	; 62
+ 41a:	0f be       	out	0x3f, r0	; 63
+ 41c:	cd bf       	out	0x3d, r28	; 61
+ 41e:	bb 9a       	sbi	0x17, 3	; 23
+ 420:	c3 98       	cbi	0x18, 3	; 24
+ 422:	a8 95       	wdr
+ 424:	88 e1       	ldi	r24, 0x18	; 24
+ 426:	98 e2       	ldi	r25, 0x28	; 40
+ 428:	0f b6       	in	r0, 0x3f	; 63
+ 42a:	f8 94       	cli
+ 42c:	a8 95       	wdr
+ 42e:	81 bd       	out	0x21, r24	; 33
+ 430:	0f be       	out	0x3f, r0	; 63
+ 432:	91 bd       	out	0x21, r25	; 33
+ 434:	6b e0       	ldi	r22, 0x0B	; 11
+ 436:	ce 01       	movw	r24, r28
+ 438:	01 96       	adiw	r24, 0x01	; 1
+ 43a:	f3 d0       	rcall	.+486    	; 0x622 <DallasTemp_SetResolution>
+ 43c:	28 e0       	ldi	r18, 0x08	; 8
+ 43e:	42 e0       	ldi	r20, 0x02	; 2
+ 440:	62 e0       	ldi	r22, 0x02	; 2
+ 442:	80 e0       	ldi	r24, 0x00	; 0
+ 444:	54 de       	rcall	.-856    	; 0xee <TM1637_Init>
+ 446:	7d de       	rcall	.-774    	; 0x142 <TM1637_DisplayLine>
+ 448:	2f ef       	ldi	r18, 0xFF	; 255
+ 44a:	80 e7       	ldi	r24, 0x70	; 112
+ 44c:	92 e0       	ldi	r25, 0x02	; 2
+ 44e:	21 50       	subi	r18, 0x01	; 1
+ 450:	80 40       	sbci	r24, 0x00	; 0
+ 452:	90 40       	sbci	r25, 0x00	; 0
+ 454:	e1 f7       	brne	.-8      	; 0x44e <main+0x44>
+ 456:	00 c0       	rjmp	.+0      	; 0x458 <main+0x4e>
+ 458:	00 00       	nop
+ 45a:	04 e6       	ldi	r16, 0x64	; 100
+ 45c:	10 e0       	ldi	r17, 0x00	; 0
+ 45e:	0d c0       	rjmp	.+26     	; 0x47a <main+0x70>
+ 460:	ce 01       	movw	r24, r28
+ 462:	01 96       	adiw	r24, 0x01	; 1
+ 464:	33 d1       	rcall	.+614    	; 0x6cc <DallasTemp_GetTemperature>
+ 466:	8b 89       	ldd	r24, Y+19	; 0x13
+ 468:	9c 89       	ldd	r25, Y+20	; 0x14
+ 46a:	b8 01       	movw	r22, r16
+ 46c:	c4 d1       	rcall	.+904    	; 0x7f6 <__udivmodhi4>
+ 46e:	2d 89       	ldd	r18, Y+21	; 0x15
+ 470:	41 e0       	ldi	r20, 0x01	; 1
+ 472:	89 89       	ldd	r24, Y+17	; 0x11
+ 474:	9a 89       	ldd	r25, Y+18	; 0x12
+ 476:	c8 de       	rcall	.-624    	; 0x208 <TM1637_DisplayFixedNum>
+ 478:	a8 95       	wdr
+ 47a:	ce 01       	movw	r24, r28
+ 47c:	01 96       	adiw	r24, 0x01	; 1
+ 47e:	b5 df       	rcall	.-150    	; 0x3ea <SensorErrorHandler>
+ 480:	88 23       	and	r24, r24
+ 482:	71 f3       	breq	.-36     	; 0x460 <main+0x56>
+ 484:	2f e7       	ldi	r18, 0x7F	; 127
+ 486:	88 e3       	ldi	r24, 0x38	; 56
+ 488:	91 e0       	ldi	r25, 0x01	; 1
+ 48a:	21 50       	subi	r18, 0x01	; 1
+ 48c:	80 40       	sbci	r24, 0x00	; 0
+ 48e:	90 40       	sbci	r25, 0x00	; 0
+ 490:	e1 f7       	brne	.-8      	; 0x48a <main+0x80>
+ 492:	00 c0       	rjmp	.+0      	; 0x494 <main+0x8a>
+ 494:	00 00       	nop
+ 496:	a8 95       	wdr
+ 498:	f0 cf       	rjmp	.-32     	; 0x47a <main+0x70>
+
+0000049a <OneWire_Presence>:
+ 49a:	f8 94       	cli
+ 49c:	bc 9a       	sbi	0x17, 4	; 23
+ 49e:	8f eb       	ldi	r24, 0xBF	; 191
+ 4a0:	93 e0       	ldi	r25, 0x03	; 3
+ 4a2:	01 97       	sbiw	r24, 0x01	; 1
+ 4a4:	f1 f7       	brne	.-4      	; 0x4a2 <OneWire_Presence+0x8>
+ 4a6:	00 c0       	rjmp	.+0      	; 0x4a8 <OneWire_Presence+0xe>
+ 4a8:	00 00       	nop
+ 4aa:	bc 98       	cbi	0x17, 4	; 23
+ 4ac:	9a eb       	ldi	r25, 0xBA	; 186
+ 4ae:	9a 95       	dec	r25
+ 4b0:	f1 f7       	brne	.-4      	; 0x4ae <OneWire_Presence+0x14>
+ 4b2:	00 c0       	rjmp	.+0      	; 0x4b4 <OneWire_Presence+0x1a>
+ 4b4:	86 b3       	in	r24, 0x16	; 22
+ 4b6:	e3 e3       	ldi	r30, 0x33	; 51
+ 4b8:	f3 e0       	ldi	r31, 0x03	; 3
+ 4ba:	31 97       	sbiw	r30, 0x01	; 1
+ 4bc:	f1 f7       	brne	.-4      	; 0x4ba <OneWire_Presence+0x20>
+ 4be:	00 c0       	rjmp	.+0      	; 0x4c0 <OneWire_Presence+0x26>
+ 4c0:	00 00       	nop
+ 4c2:	78 94       	sei
+ 4c4:	82 95       	swap	r24
+ 4c6:	81 70       	andi	r24, 0x01	; 1
+ 4c8:	91 e0       	ldi	r25, 0x01	; 1
+ 4ca:	89 27       	eor	r24, r25
+ 4cc:	08 95       	ret
+
+000004ce <OneWire_WriteByte>:
+ 4ce:	98 e0       	ldi	r25, 0x08	; 8
+ 4d0:	0d c0       	rjmp	.+26     	; 0x4ec <OneWire_WriteByte+0x1e>
+ 4d2:	bc 9a       	sbi	0x17, 4	; 23
+ 4d4:	20 ea       	ldi	r18, 0xA0	; 160
+ 4d6:	2a 95       	dec	r18
+ 4d8:	f1 f7       	brne	.-4      	; 0x4d6 <OneWire_WriteByte+0x8>
+ 4da:	bc 98       	cbi	0x17, 4	; 23
+ 4dc:	2a e1       	ldi	r18, 0x1A	; 26
+ 4de:	2a 95       	dec	r18
+ 4e0:	f1 f7       	brne	.-4      	; 0x4de <OneWire_WriteByte+0x10>
+ 4e2:	00 c0       	rjmp	.+0      	; 0x4e4 <OneWire_WriteByte+0x16>
+ 4e4:	78 94       	sei
+ 4e6:	86 95       	lsr	r24
+ 4e8:	91 50       	subi	r25, 0x01	; 1
+ 4ea:	69 f0       	breq	.+26     	; 0x506 <OneWire_WriteByte+0x38>
+ 4ec:	f8 94       	cli
+ 4ee:	80 ff       	sbrs	r24, 0
+ 4f0:	f0 cf       	rjmp	.-32     	; 0x4d2 <OneWire_WriteByte+0x4>
+ 4f2:	bc 9a       	sbi	0x17, 4	; 23
+ 4f4:	20 e1       	ldi	r18, 0x10	; 16
+ 4f6:	2a 95       	dec	r18
+ 4f8:	f1 f7       	brne	.-4      	; 0x4f6 <OneWire_WriteByte+0x28>
+ 4fa:	bc 98       	cbi	0x17, 4	; 23
+ 4fc:	2a ea       	ldi	r18, 0xAA	; 170
+ 4fe:	2a 95       	dec	r18
+ 500:	f1 f7       	brne	.-4      	; 0x4fe <OneWire_WriteByte+0x30>
+ 502:	00 c0       	rjmp	.+0      	; 0x504 <OneWire_WriteByte+0x36>
+ 504:	ef cf       	rjmp	.-34     	; 0x4e4 <OneWire_WriteByte+0x16>
+ 506:	08 95       	ret
+
+00000508 <OneWire_ReadByte>:
+ 508:	98 e0       	ldi	r25, 0x08	; 8
+ 50a:	80 e0       	ldi	r24, 0x00	; 0
+ 50c:	07 c0       	rjmp	.+14     	; 0x51c <OneWire_ReadByte+0x14>
+ 50e:	22 e9       	ldi	r18, 0x92	; 146
+ 510:	2a 95       	dec	r18
+ 512:	f1 f7       	brne	.-4      	; 0x510 <OneWire_ReadByte+0x8>
+ 514:	00 c0       	rjmp	.+0      	; 0x516 <OneWire_ReadByte+0xe>
+ 516:	78 94       	sei
+ 518:	91 50       	subi	r25, 0x01	; 1
+ 51a:	71 f0       	breq	.+28     	; 0x538 <OneWire_ReadByte+0x30>
+ 51c:	f8 94       	cli
+ 51e:	86 95       	lsr	r24
+ 520:	bc 9a       	sbi	0x17, 4	; 23
+ 522:	20 e1       	ldi	r18, 0x10	; 16
+ 524:	2a 95       	dec	r18
+ 526:	f1 f7       	brne	.-4      	; 0x524 <OneWire_ReadByte+0x1c>
+ 528:	bc 98       	cbi	0x17, 4	; 23
+ 52a:	28 e1       	ldi	r18, 0x18	; 24
+ 52c:	2a 95       	dec	r18
+ 52e:	f1 f7       	brne	.-4      	; 0x52c <OneWire_ReadByte+0x24>
+ 530:	b4 9b       	sbis	0x16, 4	; 22
+ 532:	ed cf       	rjmp	.-38     	; 0x50e <OneWire_ReadByte+0x6>
+ 534:	80 68       	ori	r24, 0x80	; 128
+ 536:	eb cf       	rjmp	.-42     	; 0x50e <OneWire_ReadByte+0x6>
+ 538:	08 95       	ret
+
+0000053a <OneWire_SkipROM>:
+ 53a:	af df       	rcall	.-162    	; 0x49a <OneWire_Presence>
+ 53c:	81 11       	cpse	r24, r1
+ 53e:	01 c0       	rjmp	.+2      	; 0x542 <OneWire_SkipROM+0x8>
+ 540:	08 95       	ret
+ 542:	8c ec       	ldi	r24, 0xCC	; 204
+ 544:	c4 df       	rcall	.-120    	; 0x4ce <OneWire_WriteByte>
+ 546:	81 e0       	ldi	r24, 0x01	; 1
+ 548:	fb cf       	rjmp	.-10     	; 0x540 <OneWire_SkipROM+0x6>
+
+0000054a <OneWire_ReadROM>:
+ 54a:	0f 93       	push	r16
+ 54c:	1f 93       	push	r17
+ 54e:	cf 93       	push	r28
+ 550:	df 93       	push	r29
+ 552:	8c 01       	movw	r16, r24
+ 554:	a2 df       	rcall	.-188    	; 0x49a <OneWire_Presence>
+ 556:	81 11       	cpse	r24, r1
+ 558:	05 c0       	rjmp	.+10     	; 0x564 <OneWire_ReadROM+0x1a>
+ 55a:	df 91       	pop	r29
+ 55c:	cf 91       	pop	r28
+ 55e:	1f 91       	pop	r17
+ 560:	0f 91       	pop	r16
+ 562:	08 95       	ret
+ 564:	83 e3       	ldi	r24, 0x33	; 51
+ 566:	b3 df       	rcall	.-154    	; 0x4ce <OneWire_WriteByte>
+ 568:	e8 01       	movw	r28, r16
+ 56a:	08 5f       	subi	r16, 0xF8	; 248
+ 56c:	1f 4f       	sbci	r17, 0xFF	; 255
+ 56e:	cc df       	rcall	.-104    	; 0x508 <OneWire_ReadByte>
+ 570:	89 93       	st	Y+, r24
+ 572:	c0 17       	cp	r28, r16
+ 574:	d1 07       	cpc	r29, r17
+ 576:	d9 f7       	brne	.-10     	; 0x56e <OneWire_ReadROM+0x24>
+ 578:	81 e0       	ldi	r24, 0x01	; 1
+ 57a:	ef cf       	rjmp	.-34     	; 0x55a <OneWire_ReadROM+0x10>
+
+0000057c <OneWire_CRC8_Update>:
+ 57c:	fc 01       	movw	r30, r24
+ 57e:	68 0f       	add	r22, r24
+ 580:	79 1f       	adc	r23, r25
+ 582:	80 e0       	ldi	r24, 0x00	; 0
+ 584:	2c e8       	ldi	r18, 0x8C	; 140
+ 586:	0b c0       	rjmp	.+22     	; 0x59e <OneWire_CRC8_Update+0x22>
+ 588:	86 95       	lsr	r24
+ 58a:	91 50       	subi	r25, 0x01	; 1
+ 58c:	29 f0       	breq	.+10     	; 0x598 <OneWire_CRC8_Update+0x1c>
+ 58e:	80 ff       	sbrs	r24, 0
+ 590:	fb cf       	rjmp	.-10     	; 0x588 <OneWire_CRC8_Update+0xc>
+ 592:	86 95       	lsr	r24
+ 594:	82 27       	eor	r24, r18
+ 596:	f9 cf       	rjmp	.-14     	; 0x58a <OneWire_CRC8_Update+0xe>
+ 598:	e6 17       	cp	r30, r22
+ 59a:	f7 07       	cpc	r31, r23
+ 59c:	21 f0       	breq	.+8      	; 0x5a6 <OneWire_CRC8_Update+0x2a>
+ 59e:	91 91       	ld	r25, Z+
+ 5a0:	89 27       	eor	r24, r25
+ 5a2:	98 e0       	ldi	r25, 0x08	; 8
+ 5a4:	f4 cf       	rjmp	.-24     	; 0x58e <OneWire_CRC8_Update+0x12>
+ 5a6:	08 95       	ret
+
+000005a8 <DallasTemp_ReadScratchpad>:
+ 5a8:	ef 92       	push	r14
+ 5aa:	ff 92       	push	r15
+ 5ac:	0f 93       	push	r16
+ 5ae:	1f 93       	push	r17
+ 5b0:	cf 93       	push	r28
+ 5b2:	df 93       	push	r29
+ 5b4:	7c 01       	movw	r14, r24
+ 5b6:	c1 df       	rcall	.-126    	; 0x53a <OneWire_SkipROM>
+ 5b8:	8e eb       	ldi	r24, 0xBE	; 190
+ 5ba:	89 df       	rcall	.-238    	; 0x4ce <OneWire_WriteByte>
+ 5bc:	e7 01       	movw	r28, r14
+ 5be:	87 01       	movw	r16, r14
+ 5c0:	08 5f       	subi	r16, 0xF8	; 248
+ 5c2:	1f 4f       	sbci	r17, 0xFF	; 255
+ 5c4:	a1 df       	rcall	.-190    	; 0x508 <OneWire_ReadByte>
+ 5c6:	89 93       	st	Y+, r24
+ 5c8:	c0 17       	cp	r28, r16
+ 5ca:	d1 07       	cpc	r29, r17
+ 5cc:	d9 f7       	brne	.-10     	; 0x5c4 <DallasTemp_ReadScratchpad+0x1c>
+ 5ce:	68 e0       	ldi	r22, 0x08	; 8
+ 5d0:	70 e0       	ldi	r23, 0x00	; 0
+ 5d2:	c7 01       	movw	r24, r14
+ 5d4:	d3 df       	rcall	.-90     	; 0x57c <OneWire_CRC8_Update>
+ 5d6:	c8 2f       	mov	r28, r24
+ 5d8:	97 df       	rcall	.-210    	; 0x508 <OneWire_ReadByte>
+ 5da:	91 e0       	ldi	r25, 0x01	; 1
+ 5dc:	c8 13       	cpse	r28, r24
+ 5de:	90 e0       	ldi	r25, 0x00	; 0
+ 5e0:	89 2f       	mov	r24, r25
+ 5e2:	df 91       	pop	r29
+ 5e4:	cf 91       	pop	r28
+ 5e6:	1f 91       	pop	r17
+ 5e8:	0f 91       	pop	r16
+ 5ea:	ff 90       	pop	r15
+ 5ec:	ef 90       	pop	r14
+ 5ee:	08 95       	ret
+
+000005f0 <DallasTemp_CopyScratchpad>:
+ 5f0:	54 df       	rcall	.-344    	; 0x49a <OneWire_Presence>
+ 5f2:	81 11       	cpse	r24, r1
+ 5f4:	01 c0       	rjmp	.+2      	; 0x5f8 <DallasTemp_CopyScratchpad+0x8>
+ 5f6:	08 95       	ret
+ 5f8:	a0 df       	rcall	.-192    	; 0x53a <OneWire_SkipROM>
+ 5fa:	88 e4       	ldi	r24, 0x48	; 72
+ 5fc:	68 df       	rcall	.-304    	; 0x4ce <OneWire_WriteByte>
+ 5fe:	81 e0       	ldi	r24, 0x01	; 1
+ 600:	fa cf       	rjmp	.-12     	; 0x5f6 <DallasTemp_CopyScratchpad+0x6>
+
+00000602 <DallasTemp_WriteScratchpad>:
+ 602:	cf 93       	push	r28
+ 604:	df 93       	push	r29
+ 606:	ec 01       	movw	r28, r24
+ 608:	98 df       	rcall	.-208    	; 0x53a <OneWire_SkipROM>
+ 60a:	8e e4       	ldi	r24, 0x4E	; 78
+ 60c:	60 df       	rcall	.-320    	; 0x4ce <OneWire_WriteByte>
+ 60e:	88 81       	ld	r24, Y
+ 610:	5e df       	rcall	.-324    	; 0x4ce <OneWire_WriteByte>
+ 612:	89 81       	ldd	r24, Y+1	; 0x01
+ 614:	5c df       	rcall	.-328    	; 0x4ce <OneWire_WriteByte>
+ 616:	8a 81       	ldd	r24, Y+2	; 0x02
+ 618:	5a df       	rcall	.-332    	; 0x4ce <OneWire_WriteByte>
+ 61a:	ea df       	rcall	.-44     	; 0x5f0 <DallasTemp_CopyScratchpad>
+ 61c:	df 91       	pop	r29
+ 61e:	cf 91       	pop	r28
+ 620:	08 95       	ret
+
+00000622 <DallasTemp_SetResolution>:
+ 622:	ff 92       	push	r15
+ 624:	0f 93       	push	r16
+ 626:	1f 93       	push	r17
+ 628:	cf 93       	push	r28
+ 62a:	df 93       	push	r29
+ 62c:	00 d0       	rcall	.+0      	; 0x62e <DallasTemp_SetResolution+0xc>
+ 62e:	1f 92       	push	r1
+ 630:	cd b7       	in	r28, 0x3d	; 61
+ 632:	de b7       	in	r29, 0x3e	; 62
+ 634:	8c 01       	movw	r16, r24
+ 636:	f6 2e       	mov	r15, r22
+ 638:	b7 df       	rcall	.-146    	; 0x5a8 <DallasTemp_ReadScratchpad>
+ 63a:	f8 01       	movw	r30, r16
+ 63c:	82 81       	ldd	r24, Z+2	; 0x02
+ 63e:	89 83       	std	Y+1, r24	; 0x01
+ 640:	83 81       	ldd	r24, Z+3	; 0x03
+ 642:	8a 83       	std	Y+2, r24	; 0x02
+ 644:	fa e0       	ldi	r31, 0x0A	; 10
+ 646:	ff 16       	cp	r15, r31
+ 648:	b9 f0       	breq	.+46     	; 0x678 <DallasTemp_SetResolution+0x56>
+ 64a:	8b e0       	ldi	r24, 0x0B	; 11
+ 64c:	f8 16       	cp	r15, r24
+ 64e:	89 f0       	breq	.+34     	; 0x672 <DallasTemp_SetResolution+0x50>
+ 650:	e9 e0       	ldi	r30, 0x09	; 9
+ 652:	fe 16       	cp	r15, r30
+ 654:	a1 f0       	breq	.+40     	; 0x67e <DallasTemp_SetResolution+0x5c>
+ 656:	8f e7       	ldi	r24, 0x7F	; 127
+ 658:	8b 83       	std	Y+3, r24	; 0x03
+ 65a:	ce 01       	movw	r24, r28
+ 65c:	01 96       	adiw	r24, 0x01	; 1
+ 65e:	d1 df       	rcall	.-94     	; 0x602 <DallasTemp_WriteScratchpad>
+ 660:	0f 90       	pop	r0
+ 662:	0f 90       	pop	r0
+ 664:	0f 90       	pop	r0
+ 666:	df 91       	pop	r29
+ 668:	cf 91       	pop	r28
+ 66a:	1f 91       	pop	r17
+ 66c:	0f 91       	pop	r16
+ 66e:	ff 90       	pop	r15
+ 670:	08 95       	ret
+ 672:	8f e5       	ldi	r24, 0x5F	; 95
+ 674:	8b 83       	std	Y+3, r24	; 0x03
+ 676:	f1 cf       	rjmp	.-30     	; 0x65a <DallasTemp_SetResolution+0x38>
+ 678:	8f e3       	ldi	r24, 0x3F	; 63
+ 67a:	8b 83       	std	Y+3, r24	; 0x03
+ 67c:	ee cf       	rjmp	.-36     	; 0x65a <DallasTemp_SetResolution+0x38>
+ 67e:	8f e1       	ldi	r24, 0x1F	; 31
+ 680:	8b 83       	std	Y+3, r24	; 0x03
+ 682:	eb cf       	rjmp	.-42     	; 0x65a <DallasTemp_SetResolution+0x38>
+
+00000684 <DallasTemp_Convert>:
+ 684:	0a df       	rcall	.-492    	; 0x49a <OneWire_Presence>
+ 686:	81 11       	cpse	r24, r1
+ 688:	01 c0       	rjmp	.+2      	; 0x68c <DallasTemp_Convert+0x8>
+ 68a:	08 95       	ret
+ 68c:	8c ec       	ldi	r24, 0xCC	; 204
+ 68e:	1f df       	rcall	.-450    	; 0x4ce <OneWire_WriteByte>
+ 690:	84 e4       	ldi	r24, 0x44	; 68
+ 692:	1d df       	rcall	.-454    	; 0x4ce <OneWire_WriteByte>
+ 694:	81 e0       	ldi	r24, 0x01	; 1
+ 696:	f9 cf       	rjmp	.-14     	; 0x68a <DallasTemp_Convert+0x6>
+
+00000698 <DallasTemp_CheckError>:
+ 698:	cf 93       	push	r28
+ 69a:	df 93       	push	r29
+ 69c:	ec 01       	movw	r28, r24
+ 69e:	fd de       	rcall	.-518    	; 0x49a <OneWire_Presence>
+ 6a0:	81 11       	cpse	r24, r1
+ 6a2:	04 c0       	rjmp	.+8      	; 0x6ac <DallasTemp_CheckError+0x14>
+ 6a4:	81 e0       	ldi	r24, 0x01	; 1
+ 6a6:	df 91       	pop	r29
+ 6a8:	cf 91       	pop	r28
+ 6aa:	08 95       	ret
+ 6ac:	ce 01       	movw	r24, r28
+ 6ae:	08 96       	adiw	r24, 0x08	; 8
+ 6b0:	4c df       	rcall	.-360    	; 0x54a <OneWire_ReadROM>
+ 6b2:	88 85       	ldd	r24, Y+8	; 0x08
+ 6b4:	88 32       	cpi	r24, 0x28	; 40
+ 6b6:	11 f0       	breq	.+4      	; 0x6bc <DallasTemp_CheckError+0x24>
+ 6b8:	82 e0       	ldi	r24, 0x02	; 2
+ 6ba:	f5 cf       	rjmp	.-22     	; 0x6a6 <DallasTemp_CheckError+0xe>
+ 6bc:	ce 01       	movw	r24, r28
+ 6be:	74 df       	rcall	.-280    	; 0x5a8 <DallasTemp_ReadScratchpad>
+ 6c0:	88 23       	and	r24, r24
+ 6c2:	11 f0       	breq	.+4      	; 0x6c8 <DallasTemp_CheckError+0x30>
+ 6c4:	80 e0       	ldi	r24, 0x00	; 0
+ 6c6:	ef cf       	rjmp	.-34     	; 0x6a6 <DallasTemp_CheckError+0xe>
+ 6c8:	83 e0       	ldi	r24, 0x03	; 3
+ 6ca:	ed cf       	rjmp	.-38     	; 0x6a6 <DallasTemp_CheckError+0xe>
+
+000006cc <DallasTemp_GetTemperature>:
+ 6cc:	cf 93       	push	r28
+ 6ce:	df 93       	push	r29
+ 6d0:	ec 01       	movw	r28, r24
+ 6d2:	d8 df       	rcall	.-80     	; 0x684 <DallasTemp_Convert>
+ 6d4:	88 23       	and	r24, r24
+ 6d6:	09 f4       	brne	.+2      	; 0x6da <DallasTemp_GetTemperature+0xe>
+ 6d8:	5e c0       	rjmp	.+188    	; 0x796 <DallasTemp_GetTemperature+0xca>
+ 6da:	2c 81       	ldd	r18, Y+4	; 0x04
+ 6dc:	82 2f       	mov	r24, r18
+ 6de:	90 e0       	ldi	r25, 0x00	; 0
+ 6e0:	80 95       	com	r24
+ 6e2:	90 95       	com	r25
+ 6e4:	80 76       	andi	r24, 0x60	; 96
+ 6e6:	99 27       	eor	r25, r25
+ 6e8:	89 2b       	or	r24, r25
+ 6ea:	09 f0       	breq	.+2      	; 0x6ee <DallasTemp_GetTemperature+0x22>
+ 6ec:	57 c0       	rjmp	.+174    	; 0x79c <DallasTemp_GetTemperature+0xd0>
+ 6ee:	2f e7       	ldi	r18, 0x7F	; 127
+ 6f0:	3f e4       	ldi	r19, 0x4F	; 79
+ 6f2:	82 e1       	ldi	r24, 0x12	; 18
+ 6f4:	21 50       	subi	r18, 0x01	; 1
+ 6f6:	30 40       	sbci	r19, 0x00	; 0
+ 6f8:	80 40       	sbci	r24, 0x00	; 0
+ 6fa:	e1 f7       	brne	.-8      	; 0x6f4 <DallasTemp_GetTemperature+0x28>
+ 6fc:	00 c0       	rjmp	.+0      	; 0x6fe <DallasTemp_GetTemperature+0x32>
+ 6fe:	00 00       	nop
+ 700:	ce 01       	movw	r24, r28
+ 702:	52 df       	rcall	.-348    	; 0x5a8 <DallasTemp_ReadScratchpad>
+ 704:	88 23       	and	r24, r24
+ 706:	09 f4       	brne	.+2      	; 0x70a <DallasTemp_GetTemperature+0x3e>
+ 708:	6b c0       	rjmp	.+214    	; 0x7e0 <DallasTemp_GetTemperature+0x114>
+ 70a:	1d 8a       	std	Y+21, r1	; 0x15
+ 70c:	89 81       	ldd	r24, Y+1	; 0x01
+ 70e:	90 e0       	ldi	r25, 0x00	; 0
+ 710:	48 81       	ld	r20, Y
+ 712:	24 2f       	mov	r18, r20
+ 714:	38 2f       	mov	r19, r24
+ 716:	33 23       	and	r19, r19
+ 718:	0c f4       	brge	.+2      	; 0x71c <DallasTemp_GetTemperature+0x50>
+ 71a:	65 c0       	rjmp	.+202    	; 0x7e6 <DallasTemp_GetTemperature+0x11a>
+ 71c:	35 95       	asr	r19
+ 71e:	27 95       	ror	r18
+ 720:	35 95       	asr	r19
+ 722:	27 95       	ror	r18
+ 724:	35 95       	asr	r19
+ 726:	27 95       	ror	r18
+ 728:	35 95       	asr	r19
+ 72a:	27 95       	ror	r18
+ 72c:	39 8b       	std	Y+17, r19	; 0x11
+ 72e:	28 8b       	std	Y+16, r18	; 0x10
+ 730:	80 95       	com	r24
+ 732:	90 95       	com	r25
+ 734:	88 7f       	andi	r24, 0xF8	; 248
+ 736:	99 27       	eor	r25, r25
+ 738:	89 2b       	or	r24, r25
+ 73a:	09 f0       	breq	.+2      	; 0x73e <DallasTemp_GetTemperature+0x72>
+ 73c:	57 c0       	rjmp	.+174    	; 0x7ec <DallasTemp_GetTemperature+0x120>
+ 73e:	81 e0       	ldi	r24, 0x01	; 1
+ 740:	8c 8b       	std	Y+20, r24	; 0x14
+ 742:	41 95       	neg	r20
+ 744:	48 83       	st	Y, r20
+ 746:	88 81       	ld	r24, Y
+ 748:	8f 70       	andi	r24, 0x0F	; 15
+ 74a:	28 2f       	mov	r18, r24
+ 74c:	30 e0       	ldi	r19, 0x00	; 0
+ 74e:	c9 01       	movw	r24, r18
+ 750:	88 0f       	add	r24, r24
+ 752:	99 1f       	adc	r25, r25
+ 754:	82 95       	swap	r24
+ 756:	92 95       	swap	r25
+ 758:	90 7f       	andi	r25, 0xF0	; 240
+ 75a:	98 27       	eor	r25, r24
+ 75c:	80 7f       	andi	r24, 0xF0	; 240
+ 75e:	98 27       	eor	r25, r24
+ 760:	82 1b       	sub	r24, r18
+ 762:	93 0b       	sbc	r25, r19
+ 764:	88 0f       	add	r24, r24
+ 766:	99 1f       	adc	r25, r25
+ 768:	88 0f       	add	r24, r24
+ 76a:	99 1f       	adc	r25, r25
+ 76c:	82 0f       	add	r24, r18
+ 76e:	93 1f       	adc	r25, r19
+ 770:	88 0f       	add	r24, r24
+ 772:	99 1f       	adc	r25, r25
+ 774:	88 0f       	add	r24, r24
+ 776:	99 1f       	adc	r25, r25
+ 778:	88 0f       	add	r24, r24
+ 77a:	99 1f       	adc	r25, r25
+ 77c:	9c 01       	movw	r18, r24
+ 77e:	99 23       	and	r25, r25
+ 780:	bc f1       	brlt	.+110    	; 0x7f0 <DallasTemp_GetTemperature+0x124>
+ 782:	35 95       	asr	r19
+ 784:	27 95       	ror	r18
+ 786:	35 95       	asr	r19
+ 788:	27 95       	ror	r18
+ 78a:	35 95       	asr	r19
+ 78c:	27 95       	ror	r18
+ 78e:	35 95       	asr	r19
+ 790:	27 95       	ror	r18
+ 792:	3b 8b       	std	Y+19, r19	; 0x13
+ 794:	2a 8b       	std	Y+18, r18	; 0x12
+ 796:	df 91       	pop	r29
+ 798:	cf 91       	pop	r28
+ 79a:	08 95       	ret
+ 79c:	26 ff       	sbrs	r18, 6
+ 79e:	0a c0       	rjmp	.+20     	; 0x7b4 <DallasTemp_GetTemperature+0xe8>
+ 7a0:	9f eb       	ldi	r25, 0xBF	; 191
+ 7a2:	27 e2       	ldi	r18, 0x27	; 39
+ 7a4:	39 e0       	ldi	r19, 0x09	; 9
+ 7a6:	91 50       	subi	r25, 0x01	; 1
+ 7a8:	20 40       	sbci	r18, 0x00	; 0
+ 7aa:	30 40       	sbci	r19, 0x00	; 0
+ 7ac:	e1 f7       	brne	.-8      	; 0x7a6 <DallasTemp_GetTemperature+0xda>
+ 7ae:	00 c0       	rjmp	.+0      	; 0x7b0 <DallasTemp_GetTemperature+0xe4>
+ 7b0:	00 00       	nop
+ 7b2:	a6 cf       	rjmp	.-180    	; 0x700 <DallasTemp_GetTemperature+0x34>
+ 7b4:	25 ff       	sbrs	r18, 5
+ 7b6:	0a c0       	rjmp	.+20     	; 0x7cc <DallasTemp_GetTemperature+0x100>
+ 7b8:	8f ef       	ldi	r24, 0xFF	; 255
+ 7ba:	96 e9       	ldi	r25, 0x96	; 150
+ 7bc:	24 e0       	ldi	r18, 0x04	; 4
+ 7be:	81 50       	subi	r24, 0x01	; 1
+ 7c0:	90 40       	sbci	r25, 0x00	; 0
+ 7c2:	20 40       	sbci	r18, 0x00	; 0
+ 7c4:	e1 f7       	brne	.-8      	; 0x7be <DallasTemp_GetTemperature+0xf2>
+ 7c6:	00 c0       	rjmp	.+0      	; 0x7c8 <DallasTemp_GetTemperature+0xfc>
+ 7c8:	00 00       	nop
+ 7ca:	9a cf       	rjmp	.-204    	; 0x700 <DallasTemp_GetTemperature+0x34>
+ 7cc:	3f e7       	ldi	r19, 0x7F	; 127
+ 7ce:	8b e4       	ldi	r24, 0x4B	; 75
+ 7d0:	92 e0       	ldi	r25, 0x02	; 2
+ 7d2:	31 50       	subi	r19, 0x01	; 1
+ 7d4:	80 40       	sbci	r24, 0x00	; 0
+ 7d6:	90 40       	sbci	r25, 0x00	; 0
+ 7d8:	e1 f7       	brne	.-8      	; 0x7d2 <DallasTemp_GetTemperature+0x106>
+ 7da:	00 c0       	rjmp	.+0      	; 0x7dc <DallasTemp_GetTemperature+0x110>
+ 7dc:	00 00       	nop
+ 7de:	90 cf       	rjmp	.-224    	; 0x700 <DallasTemp_GetTemperature+0x34>
+ 7e0:	81 e0       	ldi	r24, 0x01	; 1
+ 7e2:	8d 8b       	std	Y+21, r24	; 0x15
+ 7e4:	d8 cf       	rjmp	.-80     	; 0x796 <DallasTemp_GetTemperature+0xca>
+ 7e6:	21 5f       	subi	r18, 0xF1	; 241
+ 7e8:	3f 4f       	sbci	r19, 0xFF	; 255
+ 7ea:	98 cf       	rjmp	.-208    	; 0x71c <DallasTemp_GetTemperature+0x50>
+ 7ec:	1c 8a       	std	Y+20, r1	; 0x14
+ 7ee:	ab cf       	rjmp	.-170    	; 0x746 <DallasTemp_GetTemperature+0x7a>
+ 7f0:	21 5f       	subi	r18, 0xF1	; 241
+ 7f2:	3f 4f       	sbci	r19, 0xFF	; 255
+ 7f4:	c6 cf       	rjmp	.-116    	; 0x782 <DallasTemp_GetTemperature+0xb6>
+
+000007f6 <__udivmodhi4>:
+ 7f6:	aa 1b       	sub	r26, r26
+ 7f8:	bb 1b       	sub	r27, r27
+ 7fa:	51 e1       	ldi	r21, 0x11	; 17
+ 7fc:	07 c0       	rjmp	.+14     	; 0x80c <__udivmodhi4_ep>
+
+000007fe <__udivmodhi4_loop>:
+ 7fe:	aa 1f       	adc	r26, r26
+ 800:	bb 1f       	adc	r27, r27
+ 802:	a6 17       	cp	r26, r22
+ 804:	b7 07       	cpc	r27, r23
+ 806:	10 f0       	brcs	.+4      	; 0x80c <__udivmodhi4_ep>
+ 808:	a6 1b       	sub	r26, r22
+ 80a:	b7 0b       	sbc	r27, r23
+
+0000080c <__udivmodhi4_ep>:
+ 80c:	88 1f       	adc	r24, r24
+ 80e:	99 1f       	adc	r25, r25
+ 810:	5a 95       	dec	r21
+ 812:	a9 f7       	brne	.-22     	; 0x7fe <__udivmodhi4_loop>
+ 814:	80 95       	com	r24
+ 816:	90 95       	com	r25
+ 818:	bc 01       	movw	r22, r24
+ 81a:	cd 01       	movw	r24, r26
+ 81c:	08 95       	ret
+
+0000081e <__divmodhi4>:
+ 81e:	97 fb       	bst	r25, 7
+ 820:	07 2e       	mov	r0, r23
+ 822:	16 f4       	brtc	.+4      	; 0x828 <__divmodhi4+0xa>
+ 824:	00 94       	com	r0
+ 826:	06 d0       	rcall	.+12     	; 0x834 <__divmodhi4_neg1>
+ 828:	77 fd       	sbrc	r23, 7
+ 82a:	08 d0       	rcall	.+16     	; 0x83c <__divmodhi4_neg2>
+ 82c:	e4 df       	rcall	.-56     	; 0x7f6 <__udivmodhi4>
+ 82e:	07 fc       	sbrc	r0, 7
+ 830:	05 d0       	rcall	.+10     	; 0x83c <__divmodhi4_neg2>
+ 832:	3e f4       	brtc	.+14     	; 0x842 <__divmodhi4_exit>
+
+00000834 <__divmodhi4_neg1>:
+ 834:	90 95       	com	r25
+ 836:	81 95       	neg	r24
+ 838:	9f 4f       	sbci	r25, 0xFF	; 255
+ 83a:	08 95       	ret
+
+0000083c <__divmodhi4_neg2>:
+ 83c:	70 95       	com	r23
+ 83e:	61 95       	neg	r22
+ 840:	7f 4f       	sbci	r23, 0xFF	; 255
+
+00000842 <__divmodhi4_exit>:
+ 842:	08 95       	ret
+
+00000844 <_exit>:
+ 844:	f8 94       	cli
+
+00000846 <__stop_program>:
+ 846:	ff cf       	rjmp	.-2      	; 0x846 <__stop_program>
