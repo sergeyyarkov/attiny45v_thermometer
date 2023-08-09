@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c onewire.c dstemperature.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c onewire.c dstemperature.c twi.c tm1637.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/onewire.o ${OBJECTDIR}/dstemperature.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/onewire.o.d ${OBJECTDIR}/dstemperature.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/onewire.o ${OBJECTDIR}/dstemperature.o ${OBJECTDIR}/twi.o ${OBJECTDIR}/tm1637.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/onewire.o.d ${OBJECTDIR}/dstemperature.o.d ${OBJECTDIR}/twi.o.d ${OBJECTDIR}/tm1637.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/onewire.o ${OBJECTDIR}/dstemperature.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/onewire.o ${OBJECTDIR}/dstemperature.o ${OBJECTDIR}/twi.o ${OBJECTDIR}/tm1637.o
 
 # Source Files
-SOURCEFILES=main.c onewire.c dstemperature.c
+SOURCEFILES=main.c onewire.c dstemperature.c twi.c tm1637.c
 
 # Pack Options 
 PACK_COMPILER_OPTIONS=-I "${DFP_DIR}/include"
@@ -128,6 +128,18 @@ ${OBJECTDIR}/dstemperature.o: dstemperature.c  .generated_files/flags/default/69
 	@${RM} ${OBJECTDIR}/dstemperature.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny45 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/dstemperature.o.d" -MT "${OBJECTDIR}/dstemperature.o.d" -MT ${OBJECTDIR}/dstemperature.o  -o ${OBJECTDIR}/dstemperature.o dstemperature.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
 	
+${OBJECTDIR}/twi.o: twi.c  .generated_files/flags/default/d596a418b2941f91dfcb39d40e0cfd3f525afd03 .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/twi.o.d 
+	@${RM} ${OBJECTDIR}/twi.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny45 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/twi.o.d" -MT "${OBJECTDIR}/twi.o.d" -MT ${OBJECTDIR}/twi.o  -o ${OBJECTDIR}/twi.o twi.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
+	
+${OBJECTDIR}/tm1637.o: tm1637.c  .generated_files/flags/default/8caab7d1f321339335cad158b786d3a8a151da8d .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/tm1637.o.d 
+	@${RM} ${OBJECTDIR}/tm1637.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny45 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS} -g -DDEBUG  -gdwarf-2  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/tm1637.o.d" -MT "${OBJECTDIR}/tm1637.o.d" -MT ${OBJECTDIR}/tm1637.o  -o ${OBJECTDIR}/tm1637.o tm1637.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
+	
 else
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/e8b0a82687c5817bdc823aa0198151107a4c0b07 .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
 	@${MKDIR} "${OBJECTDIR}" 
@@ -146,6 +158,18 @@ ${OBJECTDIR}/dstemperature.o: dstemperature.c  .generated_files/flags/default/dd
 	@${RM} ${OBJECTDIR}/dstemperature.o.d 
 	@${RM} ${OBJECTDIR}/dstemperature.o 
 	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny45 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/dstemperature.o.d" -MT "${OBJECTDIR}/dstemperature.o.d" -MT ${OBJECTDIR}/dstemperature.o  -o ${OBJECTDIR}/dstemperature.o dstemperature.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
+	
+${OBJECTDIR}/twi.o: twi.c  .generated_files/flags/default/4301bd1a2a4981da7b459539bb87110266e22c69 .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/twi.o.d 
+	@${RM} ${OBJECTDIR}/twi.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny45 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/twi.o.d" -MT "${OBJECTDIR}/twi.o.d" -MT ${OBJECTDIR}/twi.o  -o ${OBJECTDIR}/twi.o twi.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
+	
+${OBJECTDIR}/tm1637.o: tm1637.c  .generated_files/flags/default/14e85bf2b5c38862ce0be771f34802e5d6a15ad1 .generated_files/flags/default/12c67fe6cdcd6963bda122da91f9033805394b5f
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/tm1637.o.d 
+	@${RM} ${OBJECTDIR}/tm1637.o 
+	 ${MP_CC}  $(MP_EXTRA_CC_PRE) -mmcu=attiny45 ${PACK_COMPILER_OPTIONS} ${PACK_COMMON_OPTIONS}  -x c -c -D__$(MP_PROCESSOR_OPTION)__  -funsigned-char -funsigned-bitfields -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -Wall -MD -MP -MF "${OBJECTDIR}/tm1637.o.d" -MT "${OBJECTDIR}/tm1637.o.d" -MT ${OBJECTDIR}/tm1637.o  -o ${OBJECTDIR}/tm1637.o tm1637.c  -DXPRJ_default=$(CND_CONF)  $(COMPARISON_BUILD)  -DF_CPU=8000000UL
 	
 endif
 

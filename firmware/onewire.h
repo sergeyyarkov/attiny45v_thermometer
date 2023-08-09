@@ -1,4 +1,3 @@
-#include <stdint.h>
 #include <stdio.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>

@@ -1,10 +1,10 @@
 build/default/production/dstemperature.o.d \
  build/default/production/dstemperature.o: dstemperature.c \
  dstemperature.h onewire.h \
- /opt/avr8-gnu-toolchain-linux_x86_64/lib/gcc/avr/7.3.0/include/stdint.h \
- /opt/avr8-gnu-toolchain-linux_x86_64/avr/include/stdint.h \
  /opt/avr8-gnu-toolchain-linux_x86_64/avr/include/stdio.h \
  /opt/avr8-gnu-toolchain-linux_x86_64/avr/include/inttypes.h \
+ /opt/avr8-gnu-toolchain-linux_x86_64/lib/gcc/avr/7.3.0/include/stdint.h \
+ /opt/avr8-gnu-toolchain-linux_x86_64/avr/include/stdint.h \
  /opt/avr8-gnu-toolchain-linux_x86_64/lib/gcc/avr/7.3.0/include/stdarg.h \
  /opt/avr8-gnu-toolchain-linux_x86_64/lib/gcc/avr/7.3.0/include/stddef.h \
  /opt/avr8-gnu-toolchain-linux_x86_64/avr/include/avr/interrupt.h \
@@ -24,13 +24,13 @@ dstemperature.h:
 
 onewire.h:
 
-/opt/avr8-gnu-toolchain-linux_x86_64/lib/gcc/avr/7.3.0/include/stdint.h:
-
-/opt/avr8-gnu-toolchain-linux_x86_64/avr/include/stdint.h:
-
 /opt/avr8-gnu-toolchain-linux_x86_64/avr/include/stdio.h:
 
 /opt/avr8-gnu-toolchain-linux_x86_64/avr/include/inttypes.h:
+
+/opt/avr8-gnu-toolchain-linux_x86_64/lib/gcc/avr/7.3.0/include/stdint.h:
+
+/opt/avr8-gnu-toolchain-linux_x86_64/avr/include/stdint.h:
 
 /opt/avr8-gnu-toolchain-linux_x86_64/lib/gcc/avr/7.3.0/include/stdarg.h:
 

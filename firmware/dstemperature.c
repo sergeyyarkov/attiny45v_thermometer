@@ -21,7 +21,7 @@ uint8_t DallasTemp_CopyScratchpad(void) {
   if (!OneWire_Presence()) return 0;
   OneWire_SkipROM();
   OneWire_WriteByte(DS18B20_CMD_CPSCRATCHPAD);
-//  _delay_ms(10); если паразитное питание то ждем 10мс и далее делать сброс
+  _delay_ms(10); // если паразитное питание то далее делать сброс
   return 1;
 }
 
