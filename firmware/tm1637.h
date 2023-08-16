@@ -39,6 +39,13 @@
 #ifndef TM1637_H
 #define	TM1637_H
 
+
+typedef struct TM1637Display {
+  uint8_t DIO_PIN;
+  uint8_t CLK_PIN;
+  uint8_t BRIGHTNESS;
+} TM1637Display;
+
 void TM1637_WriteByte(uint8_t data);
 void TM1637_Init(uint8_t DIO_PIN, uint8_t CLK_PIN, uint8_t brightness, uint8_t enabled);
 void TM1637_DisplaySymbol(uint8_t symbol, uint8_t pos);

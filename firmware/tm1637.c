@@ -33,6 +33,7 @@ void TM1637_WriteByte(uint8_t data) {
 } 
 
 void TM1637_Init(uint8_t DIO_PIN, uint8_t CLK_PIN, uint8_t brightness, uint8_t enabled) {
+  TM1637Display Display = { DIO_PIN, CLK_PIN, brightness };
   DDR_TWI |= _BV(DIO_PIN) | _BV(CLK_PIN);
   PORT_TWI &= ~(_BV(DIO_PIN) | _BV(CLK_PIN));
   TM1637_WriteByte(TM1637_DISP_CMD | (enabled | brightness));

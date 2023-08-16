@@ -773,9 +773,9 @@ Disassembly of section .text:
  576:	e0 95       	com	r30
  578:	e8 23       	and	r30, r24
  57a:	e8 bb       	out	0x18, r30	; 24
- 57c:	84 2f       	mov	r24, r20
+ 57c:	82 2f       	mov	r24, r18
  57e:	80 68       	ori	r24, 0x80	; 128
- 580:	82 2b       	or	r24, r18
+ 580:	84 2b       	or	r24, r20
  582:	df df       	rcall	.-66     	; 0x542 <TM1637_WriteByte>
  584:	08 95       	ret
 
